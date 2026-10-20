@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Keuangan Keluarga - P2K2 Modul Ekonomi</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56ZVWXLXD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y56ZVWXLXD');
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -279,7 +290,7 @@
                     <div id="savings-list" class="space-y-4"></div>
                 </section>
 
-                <!-- 4. MENU PINJAMAN (Dengan Tombol Bayar & Berpengaruh ke Saldo Kas) -->
+                <!-- 4. MENU PINJAMAN -->
                 <section id="tab-pinjaman" class="space-y-4 tab-section hidden">
                     <div class="flex bg-gray-200 p-1 rounded-xl">
                         <button type="button" onclick="setLoanTab('minjam')" id="loan-tab-minjam" class="flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
@@ -1121,7 +1132,6 @@
             showToast("Rencana pinjaman berhasil dicatat & disinkronkan ke Saldo Kas!");
         }
 
-        // Fungsi membayar cicilan pinjaman (minjam) atau menerima cicilan piutang (meminjamkan)
         function payLoanInstallment(id) {
             const loan = appState.loans.find(l => l.id === id);
             if (!loan || loan.sisaAmount <= 0) return;
@@ -1130,7 +1140,6 @@
             const today = new Date().toISOString().split('T')[0];
 
             if (loan.mode === 'minjam') {
-                // Bayar Cicilan Hutang -> Mengurangi Saldo Kas (Pengeluaran)
                 let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
                 let totalExpense = appState.transactions.filter(t => t.type === 'pengeluaran').reduce((acc, t) => acc + t.amount, 0);
                 let totalSaved = appState.transactions.filter(t => t.type === 'tabungan').reduce((acc, t) => acc + t.amount, 0);
@@ -1150,7 +1159,6 @@
                     desc: `Cicilan ${loan.purpose}`
                 });
             } else {
-                // Terima Pelunasan/Cicilan Piutang -> Menambah Saldo Kas (Pemasukan)
                 appState.transactions.unshift({
                     id: 'tx_receive_loan_' + Date.now(),
                     type: 'pemasukan',
