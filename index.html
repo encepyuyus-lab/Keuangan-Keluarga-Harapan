@@ -4,17 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Keuangan Keluarga - P2K2 Modul Ekonomi</title>
-    
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y56ZVWXLXD"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Y56ZVWXLXD');
-    </script>
-
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -78,7 +67,7 @@
         }
     </style>
 </head>
-<body class="h-full flex justify-center items-center text-gray-800">
+<body class="h-full flex justify-center items-center text-gray-900">
 
     <div id="app-container" class="w-full max-w-md h-full sm:h-[90vh] sm:rounded-3xl shadow-2xl bg-white flex flex-col overflow-hidden relative border border-emerald-900/20">
         
@@ -91,44 +80,44 @@
                     <i data-lucide="landmark" class="w-10 h-10 text-white drop-shadow-md"></i>
                 </div>
                 <h1 class="text-2xl font-black tracking-tight text-white drop-shadow">Keuangan Keluarga</h1>
-                <p class="text-emerald-100 text-xs font-medium mt-1 tracking-wide">P2K2 Modul Ekonomi & Pengelolaan Keuangan</p>
+                <p class="text-emerald-100 text-xs font-semibold mt-1 tracking-wide">P2K2 Modul Ekonomi & Pengelolaan Keuangan</p>
             </div>
 
             <div class="bg-white text-gray-900 p-6 rounded-3xl shadow-2xl my-auto relative z-20 border border-emerald-100">
                 <div class="grid grid-cols-2 border-b border-gray-200 mb-6">
-                    <button type="button" id="tab-login-btn" class="pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center">Masuk</button>
+                    <button type="button" id="tab-login-btn" class="pb-3 font-bold text-emerald-800 border-b-2 border-emerald-700 text-sm transition-all cursor-pointer text-center">Masuk</button>
                     <button type="button" id="tab-register-btn" class="pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center">Daftar Baru</button>
                 </div>
 
                 <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Nama Lengkap / No. HP</label>
+                        <label class="block text-xs font-black uppercase text-gray-700 mb-1">Nama Lengkap / No. HP</label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-700">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-800 font-bold">
                                 <i data-lucide="user" class="w-4 h-4"></i>
                             </span>
-                            <input type="text" id="auth-identifier" required placeholder="Contoh: Bpk. Encep / 08123456789" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white text-gray-900">
+                            <input type="text" id="auth-identifier" required placeholder="Contoh: Bpk. Encep / 08123456789" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:bg-white text-gray-900">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Kata Sandi (Password)</label>
+                        <label class="block text-xs font-black uppercase text-gray-700 mb-1">Kata Sandi (Password)</label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-700">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-800 font-bold">
                                 <i data-lucide="lock" class="w-4 h-4"></i>
                             </span>
-                            <input type="password" id="auth-password" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white text-gray-900">
+                            <input type="password" id="auth-password" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:bg-white text-gray-900">
                         </div>
                     </div>
 
-                    <button type="submit" id="auth-submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer text-sm">
+                    <button type="submit" id="auth-submit-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-700/30 transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer text-sm">
                         <span id="auth-btn-text">Masuk ke Aplikasi</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </form>
             </div>
 
-            <div class="text-center text-[11px] text-emerald-200 font-medium pb-2 relative z-10">
+            <div class="text-center text-xs text-emerald-100 font-bold pb-2 relative z-10">
                 Program Keluarga Harapan (PKH) • Kementerian Sosial RI
             </div>
         </div>
@@ -139,30 +128,30 @@
             <!-- HEADER -->
             <header class="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between shrink-0 shadow-sm z-10">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold text-sm border border-emerald-300" id="user-avatar">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-900 font-black text-sm border-2 border-emerald-400" id="user-avatar">
                         EN
                     </div>
                     <div>
-                        <h2 class="font-bold text-sm text-gray-900 leading-tight" id="user-display-name">Encep Yuyus</h2>
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">KPM Aktif P2K2</span>
+                        <h2 class="font-black text-sm text-gray-900 leading-tight" id="user-display-name">Encep Yuyus</h2>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-black bg-emerald-100 text-emerald-900 border border-emerald-300">KPM Aktif P2K2</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="triggerPrint()" class="p-2 text-gray-700 hover:text-emerald-700 hover:bg-emerald-50 rounded-xl transition-all cursor-pointer" title="Cetak / Export">
+                    <button onclick="triggerPrint()" class="p-2 text-gray-800 hover:text-emerald-800 hover:bg-emerald-50 rounded-xl transition-all cursor-pointer font-bold" title="Cetak / Export">
                         <i data-lucide="printer" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="handleLogout()" class="p-2 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer" title="Keluar">
+                    <button onclick="handleLogout()" class="p-2 text-gray-800 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer font-bold" title="Keluar">
                         <i data-lucide="log-out" class="w-5 h-5"></i>
                     </button>
                 </div>
             </header>
 
             <!-- CONTENT AREA -->
-            <main class="flex-1 overflow-y-auto relative p-4 pb-20" id="main-content-scroll">
+            <main class="flex-1 overflow-y-auto relative p-4 pb-24" id="main-content-scroll">
                 
                 <!-- 1. DASHBOARD TAB -->
                 <section id="tab-dashboard" class="space-y-4 tab-section">
-                    <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white p-4 rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-4 rounded-2xl shadow-md relative overflow-hidden">
                         <div class="absolute -right-4 -bottom-4 opacity-15">
                             <i data-lucide="lightbulb" class="w-32 h-32"></i>
                         </div>
@@ -172,7 +161,7 @@
                             </div>
                             <div>
                                 <h3 class="font-bold text-sm">Tips P2K2 Hari Ini</h3>
-                                <p class="text-xs text-emerald-100 mt-1 leading-relaxed" id="p2k2-tip-text">
+                                <p class="text-xs text-emerald-100 mt-1 leading-relaxed font-medium" id="p2k2-tip-text">
                                     "Kelola pendapatan dan pengeluaran secara cermat. Sisihkan uang untuk menabung di awal secara rutin sebelum memenuhi kebutuhan lain."
                                 </p>
                             </div>
@@ -180,47 +169,47 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <div class="flex items-center justify-between text-emerald-700 mb-2">
-                                <span class="text-xs font-bold uppercase text-gray-600">Pemasukan</span>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-emerald-100 shadow-sm flex flex-col justify-between">
+                            <div class="flex items-center justify-between text-emerald-800 mb-2">
+                                <span class="text-xs font-black uppercase text-gray-700">Pemasukan</span>
                                 <div class="p-2 bg-emerald-100 rounded-xl"><i data-lucide="trending-up" class="w-4 h-4"></i></div>
                             </div>
                             <span class="text-lg font-black text-gray-900" id="dash-total-income">Rp 0</span>
-                            <span class="text-[10px] font-medium text-gray-500 mt-1">Total bulan ini</span>
+                            <span class="text-[10px] font-bold text-gray-600 mt-1">Total bulan ini</span>
                         </div>
 
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <div class="flex items-center justify-between text-red-700 mb-2">
-                                <span class="text-xs font-bold uppercase text-gray-600">Pengeluaran</span>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-red-100 shadow-sm flex flex-col justify-between">
+                            <div class="flex items-center justify-between text-red-800 mb-2">
+                                <span class="text-xs font-black uppercase text-gray-700">Pengeluaran</span>
                                 <div class="p-2 bg-red-100 rounded-xl"><i data-lucide="trending-down" class="w-4 h-4"></i></div>
                             </div>
                             <span class="text-lg font-black text-gray-900" id="dash-total-expense">Rp 0</span>
-                            <span class="text-[10px] font-medium text-gray-500 mt-1">Total bulan ini</span>
+                            <span class="text-[10px] font-bold text-gray-600 mt-1">Total bulan ini</span>
                         </div>
 
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <div class="flex items-center justify-between text-blue-700 mb-2">
-                                <span class="text-xs font-bold uppercase text-gray-600">Saldo Kas</span>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-blue-100 shadow-sm flex flex-col justify-between">
+                            <div class="flex items-center justify-between text-blue-800 mb-2">
+                                <span class="text-xs font-black uppercase text-gray-700">Saldo Kas</span>
                                 <div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="wallet" class="w-4 h-4"></i></div>
                             </div>
                             <span class="text-lg font-black text-gray-900" id="dash-saldo-kas">Rp 0</span>
-                            <span class="text-[10px] font-medium text-gray-500 mt-1">Sisa uang tunai</span>
+                            <span class="text-[10px] font-bold text-gray-600 mt-1">Sisa uang tunai</span>
                         </div>
 
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
-                            <div class="flex items-center justify-between text-purple-700 mb-2">
-                                <span class="text-xs font-bold uppercase text-gray-600">Total Tabungan</span>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-purple-100 shadow-sm flex flex-col justify-between">
+                            <div class="flex items-center justify-between text-purple-800 mb-2">
+                                <span class="text-xs font-black uppercase text-gray-700">Total Tabungan</span>
                                 <div class="p-2 bg-purple-100 rounded-xl"><i data-lucide="piggy-bank" class="w-4 h-4"></i></div>
                             </div>
                             <span class="text-lg font-black text-gray-900" id="dash-total-savings">Rp 0</span>
-                            <span class="text-[10px] font-medium text-gray-500 mt-1">Terkumpul di rencana</span>
+                            <span class="text-[10px] font-bold text-gray-600 mt-1">Terkumpul di rencana</span>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h4 class="font-bold text-sm text-gray-900">Aktivitas Terakhir</h4>
-                            <button onclick="switchTab('transaksi')" class="text-xs font-bold text-emerald-700 hover:underline cursor-pointer">Lihat Semua</button>
+                            <h4 class="font-black text-sm text-gray-900">Aktivitas Terakhir</h4>
+                            <button onclick="switchTab('transaksi')" class="text-xs font-black text-emerald-800 hover:underline cursor-pointer">Lihat Semua</button>
                         </div>
                         <div id="dash-recent-list" class="space-y-3"></div>
                     </div>
@@ -230,37 +219,37 @@
                 <section id="tab-transaksi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex bg-gray-200 p-1 rounded-xl">
-                            <button type="button" onclick="setTxType('pemasukan')" id="tx-type-inc" class="flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
+                            <button type="button" onclick="setTxType('pemasukan')" id="tx-type-inc" class="flex-1 py-2 text-xs font-black rounded-lg bg-white text-emerald-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Pemasukan
                             </button>
-                            <button type="button" onclick="setTxType('pengeluaran')" id="tx-type-exp" class="flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer">
+                            <button type="button" onclick="setTxType('pengeluaran')" id="tx-type-exp" class="flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer">
                                 <i data-lucide="minus-circle" class="w-4 h-4"></i> Pengeluaran
                             </button>
                         </div>
 
                         <form id="tx-form" onsubmit="handleTransactionSubmit(event)" class="space-y-3">
                             <div>
-                                <label class="block text-xs font-bold uppercase text-gray-700 mb-1" id="tx-category-label">Sumber Pemasukan</label>
-                                <select id="tx-category" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900"></select>
+                                <label class="block text-xs font-black uppercase text-gray-800 mb-1" id="tx-category-label">Sumber Pemasukan</label>
+                                <select id="tx-category" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900"></select>
                             </div>
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Nominal (Rp)</label>
-                                    <input type="number" id="tx-amount" min="100" required placeholder="Contoh: 50000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Nominal (Rp)</label>
+                                    <input type="number" id="tx-amount" min="100" required placeholder="Contoh: 50000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Tanggal</label>
-                                    <input type="date" id="tx-date" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Tanggal</label>
+                                    <input type="date" id="tx-date" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Keterangan / Catatan</label>
-                                <input type="text" id="tx-desc" placeholder="Contoh: Gaji / Beli beras" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                <label class="block text-xs font-black uppercase text-gray-800 mb-1">Keterangan / Catatan</label>
+                                <input type="text" id="tx-desc" placeholder="Contoh: Gaji / Beli beras" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                             </div>
 
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm cursor-pointer">
+                            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm cursor-pointer">
                                 <i data-lucide="check" class="w-4 h-4"></i> Simpan Transaksi
                             </button>
                         </form>
@@ -268,8 +257,8 @@
 
                     <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h4 class="font-bold text-sm text-gray-900">Riwayat Transaksi</h4>
-                            <span class="text-xs font-bold text-gray-500" id="tx-count-label">0 Transaksi</span>
+                            <h4 class="font-black text-sm text-gray-900">Riwayat Transaksi</h4>
+                            <span class="text-xs font-black text-gray-700" id="tx-count-label">0 Transaksi</span>
                         </div>
                         <div id="tx-history-list" class="space-y-2.5"></div>
                     </div>
@@ -279,10 +268,10 @@
                 <section id="tab-menabung" class="space-y-4 tab-section hidden">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="font-bold text-base text-gray-900">Rencana Menabung</h3>
-                            <p class="text-xs text-gray-600">Wujudkan impian keluarga terencana</p>
+                            <h3 class="font-black text-base text-gray-900">Rencana Menabung</h3>
+                            <p class="text-xs text-gray-700 font-semibold">Wujudkan impian keluarga terencana</p>
                         </div>
-                        <button onclick="openSavingsModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer">
+                        <button onclick="openSavingsModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 shadow-md transition-all cursor-pointer">
                             <i data-lucide="plus" class="w-4 h-4"></i> Tambah Rencana
                         </button>
                     </div>
@@ -293,10 +282,10 @@
                 <!-- 4. MENU PINJAMAN -->
                 <section id="tab-pinjaman" class="space-y-4 tab-section hidden">
                     <div class="flex bg-gray-200 p-1 rounded-xl">
-                        <button type="button" onclick="setLoanTab('minjam')" id="loan-tab-minjam" class="flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
+                        <button type="button" onclick="setLoanTab('minjam')" id="loan-tab-minjam" class="flex-1 py-2 text-xs font-black rounded-lg bg-white text-emerald-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
                             <i data-lucide="credit-card" class="w-4 h-4"></i> Cermat Meminjam
                         </button>
-                        <button type="button" onclick="setLoanTab('meminjamkan')" id="loan-tab-meminjamkan" class="flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer">
+                        <button type="button" onclick="setLoanTab('meminjamkan')" id="loan-tab-meminjamkan" class="flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer">
                             <i data-lucide="hand-coins" class="w-4 h-4"></i> Cermat Meminjamkan
                         </button>
                     </div>
@@ -304,10 +293,10 @@
                     <div id="sub-loan-minjam" class="space-y-3">
                         <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
                             <div>
-                                <h4 class="font-bold text-sm text-gray-900">Daftar Pinjaman Keluarga</h4>
-                                <p class="text-[11px] text-gray-500">Kelola pinjaman & bayar cicilan terarah</p>
+                                <h4 class="font-black text-sm text-gray-900">Daftar Pinjaman Keluarga</h4>
+                                <p class="text-[11px] text-gray-700 font-semibold">Kelola pinjaman & bayar cicilan terarah</p>
                             </div>
-                            <button onclick="openLoanModal('minjam')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                            <button onclick="openLoanModal('minjam')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="plus" class="w-4 h-4"></i> Tambah
                             </button>
                         </div>
@@ -317,10 +306,10 @@
                     <div id="sub-loan-meminjamkan" class="space-y-3 hidden">
                         <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
                             <div>
-                                <h4 class="font-bold text-sm text-gray-900">Daftar Piutang (Meminjamkan)</h4>
-                                <p class="text-[11px] text-gray-500">Catat pinjaman & terima pelunasan</p>
+                                <h4 class="font-black text-sm text-gray-900">Daftar Piutang (Meminjamkan)</h4>
+                                <p class="text-[11px] text-gray-700 font-semibold">Catat pinjaman & terima pelunasan</p>
                             </div>
-                            <button onclick="openLoanModal('meminjamkan')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                            <button onclick="openLoanModal('meminjamkan')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="plus" class="w-4 h-4"></i> Tambah
                             </button>
                         </div>
@@ -332,34 +321,34 @@
                 <section id="tab-zis" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-800 shrink-0 border border-emerald-300">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-900 shrink-0 border-2 border-emerald-400">
                                 <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-base text-gray-900">Pengelolaan ZIS Keluarga</h3>
-                                <p class="text-xs text-gray-600">Zakat, Infaq, & Sedekah Bulanan</p>
+                                <h3 class="font-black text-base text-gray-900">Pengelolaan ZIS Keluarga</h3>
+                                <p class="text-xs text-gray-700 font-semibold">Zakat, Infaq, & Sedekah Bulanan</p>
                             </div>
                         </div>
 
                         <div class="border-t border-gray-200 pt-3 space-y-4 text-xs">
-                            <div class="bg-emerald-50/60 border border-emerald-200 p-4 rounded-2xl space-y-3">
+                            <div class="bg-emerald-50/80 border-2 border-emerald-300 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
-                                        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-700"></i>
-                                        <h4 class="font-bold text-emerald-900 text-sm">Zakat Penghasilan (Baznas)</h4>
+                                        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-800"></i>
+                                        <h4 class="font-black text-emerald-950 text-sm">Zakat Penghasilan (Baznas)</h4>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="zakat-active" onchange="updateZISConfig()" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-700"></div>
                                     </label>
                                 </div>
-                                <p class="text-gray-600 leading-relaxed text-[11px]">
+                                <p class="text-gray-700 leading-relaxed text-[11px] font-semibold">
                                     SK BAZNAS No. 15 Tahun 2026: Nisab Rp 7.640.144/bulan. Jika aktif, sistem mulai mencatat 2.5% dari pemasukan baru.
                                 </p>
-                                <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-2">
-                                    <div class="flex justify-between items-center font-bold">
-                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
-                                        <span id="zakat-unpaid-amount" class="text-emerald-700 text-sm">Rp 0</span>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-300 space-y-2">
+                                    <div class="flex justify-between items-center font-black">
+                                        <span class="text-gray-800">Akumulasi Belum Dibayar:</span>
+                                        <span id="zakat-unpaid-amount" class="text-emerald-800 text-sm">Rp 0</span>
                                     </div>
                                     <button type="button" id="btn-pay-zakat" onclick="payZIS('zakat')" class="w-full bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
                                         Bayar Zakat Sekarang
@@ -367,28 +356,28 @@
                                 </div>
                             </div>
 
-                            <div class="bg-blue-50/60 border border-blue-200 p-4 rounded-2xl space-y-3">
+                            <div class="bg-blue-50/80 border-2 border-blue-300 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
-                                        <i data-lucide="gift" class="w-5 h-5 text-blue-700"></i>
-                                        <h4 class="font-bold text-blue-900 text-sm">Infaq Bulanan</h4>
+                                        <i data-lucide="gift" class="w-5 h-5 text-blue-800"></i>
+                                        <h4 class="font-black text-blue-950 text-sm">Infaq Bulanan</h4>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="infaq-active" onchange="updateZISConfig()" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-700"></div>
                                     </label>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 items-center">
-                                    <span class="text-gray-700 font-medium">Persentase Pemasukan:</span>
+                                    <span class="text-gray-800 font-bold">Persentase Pemasukan:</span>
                                     <div class="flex items-center gap-1">
-                                        <input type="number" id="infaq-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-blue-300 rounded-xl text-center font-bold text-blue-900">
-                                        <span class="font-bold text-blue-900">%</span>
+                                        <input type="number" id="infaq-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-blue-400 rounded-xl text-center font-black text-blue-900">
+                                        <span class="font-black text-blue-900">%</span>
                                     </div>
                                 </div>
-                                <div class="bg-white p-3 rounded-xl border border-blue-200 space-y-2">
-                                    <div class="flex justify-between items-center font-bold">
-                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
-                                        <span id="infaq-unpaid-amount" class="text-blue-700 text-sm">Rp 0</span>
+                                <div class="bg-white p-3 rounded-xl border border-blue-300 space-y-2">
+                                    <div class="flex justify-between items-center font-black">
+                                        <span class="text-gray-800">Akumulasi Belum Dibayar:</span>
+                                        <span id="infaq-unpaid-amount" class="text-blue-800 text-sm">Rp 0</span>
                                     </div>
                                     <button type="button" id="btn-pay-infaq" onclick="payZIS('infaq')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
                                         Bayar Infaq Sekarang
@@ -396,28 +385,28 @@
                                 </div>
                             </div>
 
-                            <div class="bg-purple-50/60 border border-purple-200 p-4 rounded-2xl space-y-3">
+                            <div class="bg-purple-50/80 border-2 border-purple-300 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
-                                        <i data-lucide="sparkles" class="w-5 h-5 text-purple-700"></i>
-                                        <h4 class="font-bold text-purple-900 text-sm">Sedekah Bulanan</h4>
+                                        <i data-lucide="sparkles" class="w-5 h-5 text-purple-800"></i>
+                                        <h4 class="font-black text-purple-950 text-sm">Sedekah Bulanan</h4>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="sedekah-active" onchange="updateZISConfig()" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-700"></div>
                                     </label>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 items-center">
-                                    <span class="text-gray-700 font-medium">Persentase Pemasukan:</span>
+                                    <span class="text-gray-800 font-bold">Persentase Pemasukan:</span>
                                     <div class="flex items-center gap-1">
-                                        <input type="number" id="sedekah-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-purple-300 rounded-xl text-center font-bold text-purple-900">
-                                        <span class="font-bold text-purple-900">%</span>
+                                        <input type="number" id="sedekah-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-purple-400 rounded-xl text-center font-black text-purple-900">
+                                        <span class="font-black text-purple-900">%</span>
                                     </div>
                                 </div>
-                                <div class="bg-white p-3 rounded-xl border border-purple-200 space-y-2">
-                                    <div class="flex justify-between items-center font-bold">
-                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
-                                        <span id="sedekah-unpaid-amount" class="text-purple-700 text-sm">Rp 0</span>
+                                <div class="bg-white p-3 rounded-xl border border-purple-300 space-y-2">
+                                    <div class="flex justify-between items-center font-black">
+                                        <span class="text-gray-800">Akumulasi Belum Dibayar:</span>
+                                        <span id="sedekah-unpaid-amount" class="text-purple-800 text-sm">Rp 0</span>
                                     </div>
                                     <button type="button" id="btn-pay-sedekah" onclick="payZIS('sedekah')" class="w-full bg-purple-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
                                         Bayar Sedekah Sekarang
@@ -431,12 +420,12 @@
                 <!-- 6. LAPORAN TAB -->
                 <section id="tab-laporan" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
-                        <h3 class="font-bold text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
+                        <h3 class="font-black text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
                         
                         <div class="grid grid-cols-2 gap-2">
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Jenis</label>
-                                <select id="report-filter-type" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                <label class="block text-[11px] font-black uppercase text-gray-800 mb-1">Jenis</label>
+                                <select id="report-filter-type" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                                     <option value="all">Semua Jenis</option>
                                     <option value="pemasukan">Pemasukan</option>
                                     <option value="pengeluaran">Pengeluaran</option>
@@ -446,8 +435,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Urutan</label>
-                                <select id="report-filter-sort" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                <label class="block text-[11px] font-black uppercase text-gray-800 mb-1">Urutan</label>
+                                <select id="report-filter-sort" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                                     <option value="newest">Terbaru</option>
                                     <option value="oldest">Terlama</option>
                                     <option value="highest">Nominal Terbesar</option>
@@ -457,8 +446,8 @@
 
                         <div class="space-y-2 pt-1">
                             <div>
-                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Periode Waktu</label>
-                                <select id="report-filter-time" onchange="toggleDateInput()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                <label class="block text-[11px] font-black uppercase text-gray-800 mb-1">Periode Waktu</label>
+                                <select id="report-filter-time" onchange="toggleDateInput()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                                     <option value="all">Semua Waktu</option>
                                     <option value="today">Hari Ini</option>
                                     <option value="week">Minggu Ini</option>
@@ -467,28 +456,28 @@
                                 </select>
                             </div>
                             <div id="custom-date-wrapper" class="hidden">
-                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Pilih Tanggal</label>
-                                <input type="date" id="report-filter-date" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                <label class="block text-[11px] font-black uppercase text-gray-800 mb-1">Pilih Tanggal</label>
+                                <input type="date" id="report-filter-date" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                             </div>
                         </div>
 
-                        <button onclick="generateAITranslation()" class="w-full bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-bold py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
+                        <button onclick="generateAITranslation()" class="w-full bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-black py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
                             <i data-lucide="sparkles" class="w-4 h-4 text-yellow-300"></i> Terjemahkan Arus Kas (Gaya P2K2)
                         </button>
                     </div>
 
-                    <div id="ai-translation-box" class="bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-300 rounded-2xl p-4 text-xs text-gray-800 space-y-2 hidden">
-                        <div class="flex items-center gap-2 font-bold text-purple-900">
-                            <i data-lucide="bot" class="w-4 h-4 text-purple-700"></i>
+                    <div id="ai-translation-box" class="bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-300 rounded-2xl p-4 text-xs text-gray-900 space-y-2 hidden">
+                        <div class="flex items-center gap-2 font-black text-purple-950 text-sm">
+                            <i data-lucide="bot" class="w-5 h-5 text-purple-700"></i>
                             <span>Evaluasi & Terjemahan Menyeluruh Arus Kas Keluarga</span>
                         </div>
-                        <p id="ai-translation-content" class="leading-relaxed text-gray-700 font-medium"></p>
+                        <p id="ai-translation-content" class="leading-relaxed text-gray-800 font-medium"></p>
                     </div>
 
                     <div id="printable-area" class="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 space-y-3">
                         <div class="flex items-center justify-between border-b border-gray-200 pb-2">
-                            <h4 class="font-bold text-sm text-gray-900">Laporan Transaksi Lengkap</h4>
-                            <button onclick="triggerPrint()" class="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1 cursor-pointer">
+                            <h4 class="font-black text-sm text-gray-900">Laporan Transaksi Lengkap</h4>
+                            <button onclick="triggerPrint()" class="text-xs font-black text-emerald-800 hover:underline flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="printer" class="w-3.5 h-3.5"></i> Cetak PDF
                             </button>
                         </div>
@@ -500,28 +489,28 @@
                 <section id="tab-informasi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-800 shrink-0 border border-emerald-300">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-900 shrink-0 border-2 border-emerald-400">
                                 <i data-lucide="book-open" class="w-6 h-6"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-base text-gray-900">Tentang Keuangan Keluarga</h3>
-                                <p class="text-xs text-gray-600">Implementasi P2K2 Modul Ekonomi</p>
+                                <h3 class="font-black text-base text-gray-900">Tentang Keuangan Keluarga</h3>
+                                <p class="text-xs text-gray-700 font-semibold">Implementasi P2K2 Modul Ekonomi</p>
                             </div>
                         </div>
 
-                        <div class="text-xs text-gray-700 space-y-3 leading-relaxed border-t border-gray-200 pt-3 font-medium">
+                        <div class="text-xs text-gray-800 space-y-3 leading-relaxed border-t border-gray-200 pt-3 font-semibold">
                             <p>
-                                Aplikasi <strong>Keuangan Keluarga</strong> dirancang khusus untuk membantu Keluarga Penerima Manfaat (KPM) PKH dalam menerapkan materi <strong>P2K2 (Pertemuan Peningkatan Kemampuan Keluarga) Modul Ekonomi Sesi Pengelolaan Keuangan Keluarga</strong>[cite: 8].
+                                Aplikasi <strong>Keuangan Keluarga</strong> dirancang khusus untuk membantu Keluarga Penerima Manfaat (KPM) PKH dalam menerapkan materi <strong>P2K2 (Pertemuan Peningkatan Kemampuan Keluarga) Modul Ekonomi Sesi Pengelolaan Keuangan Keluarga</strong>.
                             </p>
                             <p>
-                                <strong>Tujuan Utama:</strong> Membantu keluarga mengontrol pendapatan, membedakan antara <em>kebutuhan</em> dan <em>keinginan</em>, merencanakan tabungan masa depan secara bijak, serta menghindari jeratan hutang konsumtif[cite: 8].
+                                <strong>Tujuan Utama:</strong> Membantu keluarga mengontrol pendapatan, membedakan antara <em>kebutuhan</em> dan <em>keinginan</em>, merencanakan tabungan masa depan secara bijak, serta menghindari jeratan hutang konsumtif.
                             </p>
                             
-                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl space-y-2">
-                                <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">
+                            <div class="bg-emerald-50 border-2 border-emerald-300 p-3.5 rounded-xl space-y-2">
+                                <h4 class="font-black text-emerald-950 flex items-center gap-1.5 text-sm">
                                     <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> Prinsip Dasar Pengelolaan
                                 </h4>
-                                <ul class="list-disc list-inside space-y-1 text-emerald-900 font-medium">
+                                <ul class="list-disc list-inside space-y-1 text-emerald-950 font-bold">
                                     <li>Hitung total pendapatan keluarga secara rutin.</li>
                                     <li>Susun anggaran bulanan: <em>Pendapatan = Pengeluaran + Tabungan</em> (bukan sebaliknya).</li>
                                     <li>Prioritaskan kebutuhan pokok di atas keinginan.</li>
@@ -538,11 +527,11 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm">Dukungan Pengembangan Aplikasi</h4>
-                                <p class="text-xs text-emerald-200">Mari dukung keberlanjutan aplikasi sosial ini</p>
+                                <p class="text-xs text-emerald-200 font-medium">Mari dukung keberlanjutan aplikasi sosial ini</p>
                             </div>
                         </div>
 
-                        <div class="bg-white/10 border border-white/20 p-3.5 rounded-xl space-y-2 text-xs font-medium">
+                        <div class="bg-white/10 border border-white/20 p-3.5 rounded-xl space-y-2 text-xs font-semibold">
                             <div class="flex justify-between items-center text-emerald-100">
                                 <span>Bank Syariah Indonesia (BSI)</span>
                                 <span class="font-mono text-white font-bold">7211585298</span>
@@ -560,35 +549,35 @@
 
             </main>
 
-            <!-- BOTTOM NAVIGATION BAR -->
-            <nav class="bg-white border-t border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
-                <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Dashboard</span>
+            <!-- BOTTOM NAVIGATION BAR (DIPERBESAR, DIPERTEGAS, DAN PRESISI TINGGI) -->
+            <nav class="bg-white border-t-2 border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-20 shadow-2xl fixed bottom-0 left-0 right-0 max-w-md mx-auto">
+                <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-800 transition-all flex-1 py-1 cursor-pointer font-black">
+                    <i data-lucide="layout-dashboard" class="w-6 h-6 stroke-[2.5]"></i>
+                    <span class="text-[10px] tracking-tight">Dashboard</span>
                 </button>
-                <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="receipt" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Transaksi</span>
+                <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="receipt" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">Transaksi</span>
                 </button>
-                <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="piggy-bank" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Menabung</span>
+                <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="piggy-bank" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">Menabung</span>
                 </button>
-                <button onclick="switchTab('pinjaman')" id="nav-btn-pinjaman" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="credit-card" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Pinjaman</span>
+                <button onclick="switchTab('pinjaman')" id="nav-btn-pinjaman" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="credit-card" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">Pinjaman</span>
                 </button>
-                <button onclick="switchTab('zis')" id="nav-btn-zis" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
-                    <span class="text-[9px]">ZIS</span>
+                <button onclick="switchTab('zis')" id="nav-btn-zis" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="heart-handshake" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">ZIS</span>
                 </button>
-                <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Laporan</span>
+                <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="bar-chart-3" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">Laporan</span>
                 </button>
-                <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="info" class="w-4 h-4"></i>
-                    <span class="text-[9px]">Informasi</span>
+                <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="info" class="w-6 h-6 stroke-[2]"></i>
+                    <span class="text-[10px] tracking-tight">Informasi</span>
                 </button>
             </nav>
 
@@ -599,7 +588,7 @@
     <div id="savings-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
             <div class="flex items-center justify-between border-b border-gray-200 pb-3">
-                <h3 class="font-bold text-base text-gray-900">Tambah Rencana Menabung</h3>
+                <h3 class="font-black text-base text-gray-900">Tambah Rencana Menabung</h3>
                 <button onclick="closeSavingsModal()" class="p-1 text-gray-500 hover:text-gray-800 rounded-lg cursor-pointer">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
@@ -607,24 +596,24 @@
 
             <form id="savings-form" onsubmit="handleSavingsSubmit(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Tujuan Menabung</label>
-                    <input type="text" id="sav-title" required placeholder="Contoh: Biaya Sekolah Anak" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Tujuan Menabung</label>
+                    <input type="text" id="sav-title" required placeholder="Contoh: Biaya Sekolah Anak" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Target Nominal (Rp)</label>
-                        <input type="number" id="sav-target" min="1000" required placeholder="2000000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Target Nominal (Rp)</label>
+                        <input type="number" id="sav-target" min="1000" required placeholder="2000000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Target Waktu (Bulan)</label>
-                        <input type="number" id="sav-months" min="1" required placeholder="24" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Target Waktu (Bulan)</label>
+                        <input type="number" id="sav-months" min="1" required placeholder="24" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Rencana Waktu Cicilan</label>
-                    <select id="sav-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Rencana Waktu Cicilan</label>
+                    <select id="sav-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                         <option value="Bulanan">Bulanan (Cicilan per Bulan)</option>
                         <option value="Mingguan">Mingguan (Cicilan per Minggu)</option>
                         <option value="Harian">Harian (Cicilan per Hari)</option>
@@ -633,7 +622,7 @@
 
                 <div class="flex gap-2 pt-2">
                     <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl text-sm transition-all cursor-pointer">Batal</button>
-                    <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
+                    <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
                 </div>
             </form>
         </div>
@@ -643,7 +632,7 @@
     <div id="loan-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
             <div class="flex items-center justify-between border-b border-gray-200 pb-3">
-                <h3 id="loan-modal-title" class="font-bold text-base text-gray-900">Form Pinjaman</h3>
+                <h3 id="loan-modal-title" class="font-black text-base text-gray-900">Form Pinjaman</h3>
                 <button onclick="closeLoanModal()" class="p-1 text-gray-500 hover:text-gray-800 rounded-lg cursor-pointer">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
@@ -652,34 +641,34 @@
             <form id="loan-form" onsubmit="handleLoanSubmit(event)" class="space-y-3">
                 <input type="hidden" id="loan-mode" value="minjam">
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1" id="loan-label-entity">Kepada Siapa Meminjam?</label>
-                    <input type="text" id="loan-entity" required placeholder="Contoh: Koperasi / Saudara" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    <label class="block text-xs font-black uppercase text-gray-800 mb-1" id="loan-label-entity">Kepada Siapa Meminjam?</label>
+                    <input type="text" id="loan-entity" required placeholder="Contoh: Koperasi / Saudara" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Tujuan Meminjam / Meminjamkan</label>
-                    <input type="text" id="loan-purpose" required placeholder="Contoh: Modal Usaha / Biaya Darurat" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Tujuan Meminjam / Meminjamkan</label>
+                    <input type="text" id="loan-purpose" required placeholder="Contoh: Modal Usaha / Biaya Darurat" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Besaran Nominal (Rp)</label>
-                        <input type="number" id="loan-amount" min="1000" required placeholder="500000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Besaran Nominal (Rp)</label>
+                        <input type="number" id="loan-amount" min="1000" required placeholder="500000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Cicilan / Angsuran (Rp)</label>
-                        <input type="number" id="loan-installment" min="100" required placeholder="50000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Cicilan / Angsuran (Rp)</label>
+                        <input type="number" id="loan-installment" min="100" required placeholder="50000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Lama Waktu</label>
-                        <input type="text" id="loan-duration" required placeholder="Contoh: 10 Kali" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Lama Waktu</label>
+                        <input type="text" id="loan-duration" required placeholder="Contoh: 10 Kali" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Frekuensi</label>
-                        <select id="loan-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-black uppercase text-gray-800 mb-1">Frekuensi</label>
+                        <select id="loan-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                             <option value="Bulanan">Bulanan</option>
                             <option value="Mingguan">Mingguan</option>
                             <option value="Harian">Harian</option>
@@ -688,13 +677,13 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Sedekah Pinjaman / Keringanan (Opsional)</label>
-                    <input type="text" id="loan-charity" placeholder="Contoh: Bebas bunga / Infaq jika mampu" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    <label class="block text-xs font-black uppercase text-gray-800 mb-1">Sedekah Pinjaman / Keringanan (Opsional)</label>
+                    <input type="text" id="loan-charity" placeholder="Contoh: Bebas bunga / Infaq jika mampu" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 text-gray-900">
                 </div>
 
                 <div class="flex gap-2 pt-2">
                     <button type="button" onclick="closeLoanModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl text-sm transition-all cursor-pointer">Batal</button>
-                    <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
+                    <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
                 </div>
             </form>
         </div>
@@ -703,12 +692,12 @@
     <!-- MODAL: CUSTOM MESSAGE BOX -->
     <div id="custom-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl text-center space-y-4">
-            <div id="modal-icon-container" class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl mx-auto flex items-center justify-center">
+            <div id="modal-icon-container" class="w-12 h-12 bg-emerald-100 text-emerald-900 rounded-2xl mx-auto flex items-center justify-center">
                 <i data-lucide="check-circle" class="w-6 h-6"></i>
             </div>
-            <h3 id="modal-title" class="font-bold text-base text-gray-900">Informasi</h3>
-            <p id="modal-message" class="text-xs text-gray-700 leading-relaxed font-medium"></p>
-            <button onclick="closeCustomModal()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl text-sm shadow-md transition-all cursor-pointer">Mengerti</button>
+            <h3 id="modal-title" class="font-black text-base text-gray-900">Informasi</h3>
+            <p id="modal-message" class="text-xs text-gray-800 leading-relaxed font-semibold"></p>
+            <button onclick="closeCustomModal()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-2.5 rounded-xl text-sm shadow-md transition-all cursor-pointer">Mengerti</button>
         </div>
     </div>
 
@@ -777,7 +766,7 @@
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = `p-3 rounded-2xl text-xs font-bold shadow-lg text-white flex items-center justify-between pointer-events-auto transition-all transform translate-y-0 ${type === 'success' ? 'bg-emerald-700' : 'bg-red-700'}`;
+            toast.className = `p-3 rounded-2xl text-xs font-black shadow-lg text-white flex items-center justify-between pointer-events-auto transition-all transform translate-y-0 ${type === 'success' ? 'bg-emerald-800' : 'bg-red-700'}`;
             toast.innerHTML = `<span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
@@ -790,7 +779,7 @@
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-message').innerText = message;
             const iconContainer = document.getElementById('modal-icon-container');
-            iconContainer.className = `w-12 h-12 rounded-2xl mx-auto flex items-center justify-center ${isSuccess ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`;
+            iconContainer.className = `w-12 h-12 rounded-2xl mx-auto flex items-center justify-center ${isSuccess ? 'bg-emerald-100 text-emerald-900' : 'bg-red-100 text-red-900'}`;
             iconContainer.innerHTML = isSuccess ? '<i data-lucide="check-circle" class="w-6 h-6"></i>' : '<i data-lucide="alert-circle" class="w-6 h-6"></i>';
             lucide.createIcons();
             document.getElementById('custom-modal').classList.remove('hidden');
@@ -842,11 +831,11 @@
             const submitBtnText = document.getElementById('auth-btn-text');
 
             if (mode === 'login') {
-                loginBtn.className = "pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center";
+                loginBtn.className = "pb-3 font-black text-emerald-800 border-b-2 border-emerald-700 text-sm transition-all cursor-pointer text-center";
                 registerBtn.className = "pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center";
                 submitBtnText.innerText = "Masuk ke Aplikasi";
             } else {
-                registerBtn.className = "pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center";
+                registerBtn.className = "pb-3 font-black text-emerald-800 border-b-2 border-emerald-700 text-sm transition-all cursor-pointer text-center";
                 loginBtn.className = "pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center";
                 submitBtnText.innerText = "Daftar & Masuk";
             }
@@ -902,10 +891,10 @@
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (tab === tabName) {
                     if (section) section.classList.remove('hidden');
-                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold";
+                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-emerald-800 transition-all flex-1 py-1 cursor-pointer font-black scale-105";
                 } else {
                     if (section) section.classList.add('hidden');
-                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium";
+                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold";
                 }
             });
             document.getElementById('main-content-scroll').scrollTop = 0;
@@ -960,15 +949,15 @@
 
             catSelect.innerHTML = '';
             if (type === 'pemasukan') {
-                incBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
-                expBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                incBtn.className = "flex-1 py-2 text-xs font-black rounded-lg bg-white text-emerald-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                expBtn.className = "flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 catLabel.innerText = "Sumber Pemasukan";
                 INCOME_CATEGORIES.forEach(cat => {
                     catSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
                 });
             } else {
-                expBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-red-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
-                incBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                expBtn.className = "flex-1 py-2 text-xs font-black rounded-lg bg-white text-red-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                incBtn.className = "flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 catLabel.innerText = "Jenis Pengeluaran";
                 EXPENSE_CATEGORIES.forEach(cat => {
                     catSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
@@ -1022,7 +1011,7 @@
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
 
-        // --- LOAN LOGIC (PENGARUH KE SALDO KAS & TOMBOL PEMBAYARAN) ---
+        // --- LOAN LOGIC ---
         function setLoanTab(tab) {
             appState.loanTab = tab;
             const btnMinjam = document.getElementById('loan-tab-minjam');
@@ -1031,13 +1020,13 @@
             const subMeminjamkan = document.getElementById('sub-loan-meminjamkan');
 
             if (tab === 'minjam') {
-                btnMinjam.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
-                btnMeminjamkan.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMinjam.className = "flex-1 py-2 text-xs font-black rounded-lg bg-white text-emerald-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMeminjamkan.className = "flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 subMinjam.classList.remove('hidden');
                 subMeminjamkan.classList.add('hidden');
             } else {
-                btnMeminjamkan.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
-                btnMinjam.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMeminjamkan.className = "flex-1 py-2 text-xs font-black rounded-lg bg-white text-emerald-900 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMinjam.className = "flex-1 py-2 text-xs font-black rounded-lg text-gray-700 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 subMeminjamkan.classList.remove('hidden');
                 subMinjam.classList.add('hidden');
             }
@@ -1092,9 +1081,7 @@
                 date: today
             };
 
-            // Berpengaruh ke Saldo Kas
             if (mode === 'minjam') {
-                // Meminjam uang -> Uang masuk ke Kas (Pemasukan)
                 appState.transactions.unshift({
                     id: 'tx_loan_in_' + Date.now(),
                     type: 'pemasukan',
@@ -1104,7 +1091,6 @@
                     desc: purpose
                 });
             } else {
-                // Meminjamkan uang -> Uang keluar dari Kas (Pengeluaran)
                 let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
                 let totalExpense = appState.transactions.filter(t => t.type === 'pengeluaran').reduce((acc, t) => acc + t.amount, 0);
                 let totalSaved = appState.transactions.filter(t => t.type === 'tabungan').reduce((acc, t) => acc + t.amount, 0);
@@ -1190,84 +1176,84 @@
             const meminjamkans = appState.loans.filter(l => l.mode === 'meminjamkan');
 
             if (minjams.length === 0) {
-                minjamContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjam.</div>`;
+                minjamContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500 font-bold">Belum ada catatan cermat meminjam.</div>`;
             } else {
                 minjamContainer.innerHTML = minjams.map(l => {
                     let progress = Math.min(100, Math.round(((l.amount - l.sisaAmount) / l.amount) * 100));
                     return `
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3 text-xs">
+                        <div class="bg-white p-4 rounded-2xl border-2 border-gray-200 shadow-sm space-y-3 text-xs">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-[10px]">Meminjam Ke: ${l.entity}</span>
-                                    <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                                    <span class="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded text-[10px]">Meminjam Ke: ${l.entity}</span>
+                                    <h4 class="font-black text-sm text-gray-900 mt-1">${l.purpose}</h4>
                                 </div>
                                 <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
                             
-                            <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                            <div class="grid grid-cols-2 gap-2 text-gray-700 bg-gray-50 p-2.5 rounded-xl font-bold">
                                 <div>Total Pinjaman: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
                                 <div>Sisa Hutang: <strong class="text-red-600">${formatRupiah(l.sisaAmount)}</strong></div>
                                 <div>Besar Cicilan: <strong class="text-gray-900">${formatRupiah(l.installment)} (${l.frequency})</strong></div>
-                                <div>Sedekah/Keringanan: <strong class="text-emerald-700">${l.charity}</strong></div>
+                                <div>Sedekah/Keringanan: <strong class="text-emerald-800">${l.charity}</strong></div>
                             </div>
 
                             <div class="space-y-1">
-                                <div class="flex justify-between text-[11px] font-semibold text-gray-500">
+                                <div class="flex justify-between text-[11px] font-bold text-gray-600">
                                     <span>Progress Pelunasan (${progress}%)</span>
                                     <span>${l.sisaAmount <= 0 ? 'LUNAS' : 'Belum Lunas'}</span>
                                 </div>
-                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                                <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
                                     <div class="bg-emerald-600 h-full rounded-full transition-all" style="width: ${progress}%"></div>
                                 </div>
                             </div>
 
                             ${l.sisaAmount > 0 ? `
-                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs transition-all cursor-pointer shadow">
+                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow">
                                     Bayar Cicilan (${formatRupiah(l.installment)})
                                 </button>
-                            ` : `<div class="text-center font-bold text-emerald-700 py-1 bg-emerald-50 rounded-xl">Pinjaman Telah Lunas 🎉</div>`}
+                            ` : `<div class="text-center font-black text-emerald-800 py-2 bg-emerald-50 rounded-xl">Pinjaman Telah Lunas 🎉</div>`}
                         </div>
                     `;
                 }).join('');
             }
 
             if (meminjamkans.length === 0) {
-                meminjamkanContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjamkan.</div>`;
+                meminjamkanContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500 font-bold">Belum ada catatan cermat meminjamkan.</div>`;
             } else {
                 meminjamkans.innerHTML = meminjamkans.map(l => {
                     let progress = Math.min(100, Math.round(((l.amount - l.sisaAmount) / l.amount) * 100));
                     return `
-                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3 text-xs">
+                        <div class="bg-white p-4 rounded-2xl border-2 border-gray-200 shadow-sm space-y-3 text-xs">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">Peminjam: ${l.entity}</span>
-                                    <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                                    <span class="bg-blue-100 text-blue-900 font-black px-2 py-0.5 rounded text-[10px]">Peminjam: ${l.entity}</span>
+                                    <h4 class="font-black text-sm text-gray-900 mt-1">${l.purpose}</h4>
                                 </div>
                                 <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                            <div class="grid grid-cols-2 gap-2 text-gray-700 bg-gray-50 p-2.5 rounded-xl font-bold">
                                 <div>Total Piutang: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
-                                <div>Belum Dibayar: <strong class="text-amber-600">${formatRupiah(l.sisaAmount)}</strong></div>
+                                <div>Belum Dibayar: <strong class="text-amber-700">${formatRupiah(l.sisaAmount)}</strong></div>
                                 <div>Cicilan Masuk: <strong class="text-gray-900">${formatRupiah(l.installment)} (${l.frequency})</strong></div>
-                                <div>Sedekah Pinjaman: <strong class="text-emerald-700">${l.charity}</strong></div>
+                                <div>Sedekah Pinjaman: <strong class="text-emerald-800">${l.charity}</strong></div>
                             </div>
 
                             <div class="space-y-1">
-                                <div class="flex justify-between text-[11px] font-semibold text-gray-500">
+                                <div class="flex justify-between text-[11px] font-bold text-gray-600">
                                     <span>Progress Pengembalian (${progress}%)</span>
                                     <span>${l.sisaAmount <= 0 ? 'LUNAS' : 'Belum Lunas'}</span>
                                 </div>
-                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                                <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
                                     <div class="bg-blue-600 h-full rounded-full transition-all" style="width: ${progress}%"></div>
                                 </div>
                             </div>
 
                             ${l.sisaAmount > 0 ? `
-                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs transition-all cursor-pointer shadow">
+                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow">
                                     Terima Cicilan (${formatRupiah(l.installment)})
                                 </button>
-                            ` : `<div class="text-center font-bold text-blue-700 py-1 bg-blue-50 rounded-xl">Piutang Telah Lunas 🎉</div>`}
+                            ` : `<div class="text-center font-black text-blue-800 py-2 bg-blue-50 rounded-xl">Piutang Telah Lunas 🎉</div>`}
                         </div>
                     `;
                 }).join('');
@@ -1322,10 +1308,10 @@
             if (zBtn) {
                 if (zakatUnpaid > 0) {
                     zBtn.disabled = false;
-                    zBtn.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                    zBtn.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
                 } else {
                     zBtn.disabled = true;
-                    zBtn.className = "w-full bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                    zBtn.className = "w-full bg-emerald-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
                 }
             }
 
@@ -1343,10 +1329,10 @@
             if (iBtn) {
                 if (infaqUnpaid > 0) {
                     iBtn.disabled = false;
-                    iBtn.className = "w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                    iBtn.className = "w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
                 } else {
                     iBtn.disabled = true;
-                    iBtn.className = "w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                    iBtn.className = "w-full bg-blue-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
                 }
             }
 
@@ -1364,10 +1350,10 @@
             if (sBtn) {
                 if (sedekahUnpaid > 0) {
                     sBtn.disabled = false;
-                    sBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                    sBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
                 } else {
                     sBtn.disabled = true;
-                    sBtn.className = "w-full bg-purple-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                    sBtn.className = "w-full bg-purple-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
                 }
             }
         }
@@ -1418,22 +1404,22 @@
             const container = document.getElementById('dash-recent-list');
             const recents = appState.transactions.slice(0, 3);
             if (recents.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-2 font-medium">Belum ada transaksi tercatat.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-2 font-bold">Belum ada transaksi tercatat.</p>`;
                 return;
             }
 
             container.innerHTML = recents.map(tx => `
                 <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-800' : 'bg-teal-100 text-teal-800'}">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-900' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-900' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-900' : 'bg-teal-100 text-teal-900'}">
                             <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : tx.type === 'tabungan' ? 'piggy-bank' : 'heart-handshake'}" class="w-4 h-4"></i>
                         </div>
                         <div>
-                            <h5 class="font-bold text-xs text-gray-900">${tx.category}</h5>
-                            <p class="text-[10px] text-gray-500 font-medium">${tx.desc} • ${tx.date}</p>
+                            <h5 class="font-black text-xs text-gray-900">${tx.category}</h5>
+                            <p class="text-[10px] text-gray-600 font-semibold">${tx.desc} • ${tx.date}</p>
                         </div>
                     </div>
-                    <span class="font-bold text-xs ${tx.type === 'pemasukan' ? 'text-emerald-700' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-700'}">
+                    <span class="font-black text-xs ${tx.type === 'pemasukan' ? 'text-emerald-800' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-800'}">
                         ${tx.type === 'pemasukan' ? '+' : '-'}${formatRupiah(tx.amount)}
                     </span>
                 </div>
@@ -1445,24 +1431,24 @@
             document.getElementById('tx-count-label').innerText = `${appState.transactions.length} Transaksi`;
 
             if (appState.transactions.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-medium">Belum ada riwayat transaksi.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-bold">Belum ada riwayat transaksi.</p>`;
                 return;
             }
 
             container.innerHTML = appState.transactions.map(tx => `
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-800' : 'bg-teal-100 text-teal-800'}">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-900' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-900' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-900' : 'bg-teal-100 text-teal-900'}">
                             <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : tx.type === 'tabungan' ? 'piggy-bank' : 'heart-handshake'}" class="w-4 h-4"></i>
                         </div>
                         <div>
-                            <h5 class="font-bold text-xs text-gray-900">${tx.category}</h5>
-                            <p class="text-[10px] text-gray-600 font-medium">${tx.desc}</p>
-                            <span class="text-[9px] text-gray-500 font-medium">${tx.date}</span>
+                            <h5 class="font-black text-xs text-gray-900">${tx.category}</h5>
+                            <p class="text-[10px] text-gray-700 font-semibold">${tx.desc}</p>
+                            <span class="text-[9px] text-gray-500 font-bold">${tx.date}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="font-bold text-xs ${tx.type === 'pemasukan' ? 'text-emerald-700' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-700'}">
+                        <span class="font-black text-xs ${tx.type === 'pemasukan' ? 'text-emerald-800' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-800'}">
                             ${tx.type === 'pemasukan' ? '+' : '-'}${formatRupiah(tx.amount)}
                         </span>
                         <button onclick="cancelTransaction('${tx.id}')" class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer" title="Batalkan">
@@ -1556,7 +1542,7 @@
                 container.innerHTML = `
                     <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center space-y-2">
                         <i data-lucide="piggy-bank" class="w-10 h-10 text-gray-400 mx-auto"></i>
-                        <p class="text-xs text-gray-600 font-medium">Belum ada rencana menabung. Ayo buat tujuan finansial keluarga Anda!</p>
+                        <p class="text-xs text-gray-700 font-bold">Belum ada rencana menabung. Ayo buat tujuan finansial keluarga Anda!</p>
                     </div>`;
                 return;
             }
@@ -1564,11 +1550,11 @@
             container.innerHTML = appState.savings.map(sav => {
                 const percentage = Math.min(100, Math.round((sav.collected / sav.target) * 100));
                 return `
-                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                    <div class="bg-white p-4 rounded-2xl border-2 border-gray-200 shadow-sm space-y-3">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h4 class="font-bold text-sm text-gray-900">${sav.title}</h4>
-                                <p class="text-[10px] text-gray-600 font-medium">Target Waktu: ${sav.months} Bulan (${sav.frequency})</p>
+                                <h4 class="font-black text-sm text-gray-900">${sav.title}</h4>
+                                <p class="text-[10px] text-gray-700 font-bold">Target Waktu: ${sav.months} Bulan (${sav.frequency})</p>
                             </div>
                             <button onclick="cancelSavings('${sav.id}')" class="text-gray-400 hover:text-red-600 p-1 rounded-lg cursor-pointer" title="Batalkan Rencana">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
@@ -1576,21 +1562,21 @@
                         </div>
 
                         <div class="space-y-1">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span class="text-gray-600">Terkumpul: <strong class="text-emerald-800">${formatRupiah(sav.collected)}</strong></span>
-                                <span class="text-gray-500">Target: ${formatRupiah(sav.target)} (${percentage}%)</span>
+                            <div class="flex justify-between text-xs font-black">
+                                <span class="text-gray-700">Terkumpul: <strong class="text-emerald-800">${formatRupiah(sav.collected)}</strong></span>
+                                <span class="text-gray-600">Target: ${formatRupiah(sav.target)} (${percentage}%)</span>
                             </div>
-                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
                                 <div class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: ${percentage}%"></div>
                             </div>
                         </div>
 
                         <div class="flex items-center justify-between pt-2 border-t border-gray-200">
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase block font-bold">Cicilan ${sav.frequency}</span>
+                                <span class="text-[10px] text-gray-500 uppercase block font-black">Cicilan ${sav.frequency}</span>
                                 <span class="text-xs font-black text-gray-900">${formatRupiah(sav.installment)}</span>
                             </div>
-                            <button onclick="depositSavings('${sav.id}')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
+                            <button onclick="depositSavings('${sav.id}')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
                                 <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Setor Cicilan
                             </button>
                         </div>
@@ -1652,17 +1638,17 @@
             }
 
             if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-medium">Tidak ada data transaksi yang sesuai filter waktu & kategori.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-bold">Tidak ada data transaksi yang sesuai filter waktu & kategori.</p>`;
                 return;
             }
 
             container.innerHTML = filtered.map(tx => `
                 <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-200 text-xs">
                     <div>
-                        <h5 class="font-bold text-gray-900">${tx.category}</h5>
-                        <p class="text-[10px] text-gray-600 font-medium">${tx.desc} • ${tx.date}</p>
+                        <h5 class="font-black text-gray-900">${tx.category}</h5>
+                        <p class="text-[10px] text-gray-700 font-semibold">${tx.desc} • ${tx.date}</p>
                     </div>
-                    <span class="font-bold ${tx.type === 'pemasukan' ? 'text-emerald-700' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-700'}">
+                    <span class="font-black ${tx.type === 'pemasukan' ? 'text-emerald-800' : tx.type === 'pengeluaran' ? 'text-red-700' : 'text-purple-800'}">
                         ${tx.type === 'pemasukan' ? '+' : '-'}${formatRupiah(tx.amount)}
                     </span>
                 </div>
