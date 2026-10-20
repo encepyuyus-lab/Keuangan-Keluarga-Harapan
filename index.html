@@ -293,7 +293,8 @@
                         </div>
 
                         <div class="border-t border-gray-200 pt-3 space-y-4 text-xs">
-                            <!-- 1. ZAKAT PENGHASILAN BAZNAS -->
+                            
+                            <!-- 1. ZAKAT PENGHASILAN BAZNAS (SK No. 15 Tahun 2026: Rp 7.640.144/bulan) -->
                             <div class="bg-emerald-50/60 border border-emerald-200 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -306,11 +307,16 @@
                                     </label>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed text-[11px]">
-                                    Perhitungan otomatis realtime mengikuti aturan Baznas (Tarif 2.5% dari total pemasukan bulanan jika mencapai nisab setara 85 gram emas / ± Rp 6.875.000 per bulan). Berdiri sendiri dari pemasukan, tidak dipengaruhi pengeluaran.
+                                    SK BAZNAS No. 15 Tahun 2026: Nisab Rp 7.640.144/bulan. Ketika tombol aktif, sistem mulai mencatat 2.5% dari pemasukan baru.
                                 </p>
-                                <div id="zakat-status-box" class="bg-white p-3 rounded-xl border border-emerald-200 flex justify-between items-center font-bold">
-                                    <span class="text-gray-700">Estimasi Zakat Bulan Ini:</span>
-                                    <span id="zakat-calculated-amount" class="text-emerald-700">Rp 0 (Belum Mencapai Nishob)</span>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-2">
+                                    <div class="flex justify-between items-center font-bold">
+                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
+                                        <span id="zakat-unpaid-amount" class="text-emerald-700 text-sm">Rp 0</span>
+                                    </div>
+                                    <button type="button" id="btn-pay-zakat" onclick="payZIS('zakat')" class="w-full bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
+                                        Bayar Zakat Sekarang
+                                    </button>
                                 </div>
                             </div>
 
@@ -327,11 +333,20 @@
                                     </label>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 items-center">
-                                    <span class="text-gray-700 font-medium">Persentase dari Pemasukan:</span>
+                                    <span class="text-gray-700 font-medium">Persentase Pemasukan:</span>
                                     <div class="flex items-center gap-1">
                                         <input type="number" id="infaq-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-blue-300 rounded-xl text-center font-bold text-blue-900">
                                         <span class="font-bold text-blue-900">%</span>
                                     </div>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-blue-200 space-y-2">
+                                    <div class="flex justify-between items-center font-bold">
+                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
+                                        <span id="infaq-unpaid-amount" class="text-blue-700 text-sm">Rp 0</span>
+                                    </div>
+                                    <button type="button" id="btn-pay-infaq" onclick="payZIS('infaq')" class="w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
+                                        Bayar Infaq Sekarang
+                                    </button>
                                 </div>
                             </div>
 
@@ -348,18 +363,24 @@
                                     </label>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 items-center">
-                                    <span class="text-gray-700 font-medium">Persentase dari Pemasukan:</span>
+                                    <span class="text-gray-700 font-medium">Persentase Pemasukan:</span>
                                     <div class="flex items-center gap-1">
                                         <input type="number" id="sedekah-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-purple-300 rounded-xl text-center font-bold text-purple-900">
                                         <span class="font-bold text-purple-900">%</span>
                                     </div>
                                 </div>
+                                <div class="bg-white p-3 rounded-xl border border-purple-200 space-y-2">
+                                    <div class="flex justify-between items-center font-bold">
+                                        <span class="text-gray-700">Akumulasi Belum Dibayar:</span>
+                                        <span id="sedekah-unpaid-amount" class="text-purple-700 text-sm">Rp 0</span>
+                                    </div>
+                                    <button type="button" id="btn-pay-sedekah" onclick="payZIS('sedekah')" class="w-full bg-purple-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed" disabled>
+                                        Bayar Sedekah Sekarang
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <button onclick="executeZISCalculation()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
-                            <i data-lucide="calculator" class="w-4 h-4"></i> Hitung & Catat Otomatis ke Transaksi Bulanan
-                        </button>
+                        </div>
                     </div>
                 </section>
 
@@ -495,7 +516,7 @@
 
             </main>
 
-            <!-- BOTTOM NAVIGATION BAR (Ditambah Menu ZIS) -->
+            <!-- BOTTOM NAVIGATION BAR -->
             <nav class="bg-white border-t border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
                 <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
@@ -597,6 +618,11 @@
                 infaqPercent: 2.5,
                 sedekahActive: false,
                 sedekahPercent: 2.5
+            },
+            zisPaidIds: {
+                zakatLastPaidIndex: 0,
+                infaqLastPaidIndex: 0,
+                sedekahLastPaidIndex: 0
             }
         };
 
@@ -669,7 +695,8 @@
             localStorage.setItem(key, JSON.stringify({
                 transactions: appState.transactions,
                 savings: appState.savings,
-                zisConfig: appState.zisConfig
+                zisConfig: appState.zisConfig,
+                zisPaidIds: appState.zisPaidIds
             }));
         }
 
@@ -677,7 +704,7 @@
             const lastUser = localStorage.getItem('keuangan_keluarga_active_user');
             if (lastUser) {
                 appState.currentUser = lastUser;
-                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[], "zisConfig":{}}');
+                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[], "zisConfig":{}, "zisPaidIds":{}}');
                 appState.transactions = data.transactions || [];
                 appState.savings = data.savings || [];
                 appState.zisConfig = Object.assign({
@@ -687,6 +714,11 @@
                     sedekahActive: false,
                     sedekahPercent: 2.5
                 }, data.zisConfig || {});
+                appState.zisPaidIds = Object.assign({
+                    zakatLastPaidIndex: 0,
+                    infaqLastPaidIndex: 0,
+                    sedekahLastPaidIndex: 0
+                }, data.zisPaidIds || {});
             }
         }
 
@@ -780,7 +812,6 @@
                 if (tx.type === 'pemasukan') totalIncome += tx.amount;
                 else if (tx.type === 'pengeluaran') totalExpense += tx.amount;
                 else if (tx.type === 'tabungan') totalSavingsDeposited += tx.amount;
-                // ZIS dicatat sebagai jenis khusus atau pengeluaran sosial, tidak mengurangi kas perhitungan operasional rumah tangga secara keliru jika dicatat mandiri
             });
 
             const saldoKas = totalIncome - totalExpense - totalSavingsDeposited;
@@ -876,7 +907,7 @@
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
 
-        // --- ZIS (Zakat, Infaq, Sedekah) LOGIC ---
+        // --- ZIS REALTIME LOGIC DENGAN ATURAN BAZNAS SK NO 15 TAHUN 2026 & TOMBOL BAYAR KHUSUS ---
         function syncZISUI() {
             const zCheckbox = document.getElementById('zakat-active');
             const iCheckbox = document.getElementById('infaq-active');
@@ -890,7 +921,7 @@
             if (sCheckbox) sCheckbox.checked = appState.zisConfig.sedekahActive;
             if (sPercent) sPercent.value = appState.zisConfig.sedekahPercent;
 
-            calculateRealtimeZakat();
+            calculateZISUnpaid();
         }
 
         function updateZISConfig() {
@@ -901,84 +932,128 @@
             appState.zisConfig.sedekahPercent = parseFloat(document.getElementById('sedekah-percent').value) || 0;
 
             saveToStorage();
-            calculateRealtimeZakat();
+            calculateZISUnpaid();
         }
 
-        function calculateRealtimeZakat() {
-            // Hitung total pemasukan bulanan saat ini (berdiri sendiri, tidak terpengaruh pengeluaran)
-            let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
+        function calculateZISUnpaid() {
+            // Ambil daftar pemasukan yang belum dibayarkan ZIS-nya berdasarkan index terakhir pembayaran
+            const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
             
-            // Standar Nishob Zakat Penghasilan Baznas: Setara 85 gram emas per tahun (~Rp 82.500.000 / tahun atau Rp 6.875.000 / bulan)
-            const nishobBulanan = 6875000;
-            const zakatBox = document.getElementById('zakat-calculated-amount');
+            // Nishob Zakat Penghasilan Baznas Terbaru (SK No. 15 Tahun 2026: Rp 7.640.144 / bulan)
+            const nishobBulanan = 7640144;
+            let totalIncomeAll = incomes.reduce((acc, t) => acc + t.amount, 0);
 
-            if (!zakatBox) return;
+            // 1. Zakat Calculation (Hanya dari pemasukan setelah index terakhir dibayar jika aktif)
+            let zakatUnpaid = 0;
+            const zBox = document.getElementById('zakat-unpaid-amount');
+            const zBtn = document.getElementById('btn-pay-zakat');
 
-            if (totalIncome >= nishobBulanan) {
-                let calculatedZakat = totalIncome * 0.025; // 2.5%
-                zakatBox.innerText = `${formatRupiah(calculatedZakat)} (Wajib Zakat)`;
-                zakatBox.className = "text-emerald-700 font-bold";
-            } else {
-                zakatBox.innerText = `Rp 0 (Pemasukan < Nishob Rp 6.875.000)`;
-                zakatBox.className = "text-gray-500 text-xs";
+            if (appState.zisConfig.zakatActive && totalIncomeAll >= nishobBulanan) {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.zakatLastPaidIndex);
+                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                zakatUnpaid = sumUnpaidIncome * 0.025; // 2.5%
+            }
+
+            if (zBox) zBox.innerText = formatRupiah(zakatUnpaid);
+            if (zBtn) {
+                if (zakatUnpaid > 0) {
+                    zBtn.disabled = false;
+                    zBtn.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                } else {
+                    zBtn.disabled = true;
+                    zBtn.className = "w-full bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                }
+            }
+
+            // 2. Infaq Calculation
+            let infaqUnpaid = 0;
+            const iBox = document.getElementById('infaq-unpaid-amount');
+            const iBtn = document.getElementById('btn-pay-infaq');
+
+            if (appState.zisConfig.infaqActive) {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.infaqLastPaidIndex);
+                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                infaqUnpaid = sumUnpaidIncome * (appState.zisConfig.infaqPercent / 100);
+            }
+
+            if (iBox) iBox.innerText = formatRupiah(infaqUnpaid);
+            if (iBtn) {
+                if (infaqUnpaid > 0) {
+                    iBtn.disabled = false;
+                    iBtn.className = "w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                } else {
+                    iBtn.disabled = true;
+                    iBtn.className = "w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                }
+            }
+
+            // 3. Sedekah Calculation
+            let sedekahUnpaid = 0;
+            const sBox = document.getElementById('sedekah-unpaid-amount');
+            const sBtn = document.getElementById('btn-pay-sedekah');
+
+            if (appState.zisConfig.sedekahActive) {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.sedekahLastPaidIndex);
+                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                sedekahUnpaid = sumUnpaidIncome * (appState.zisConfig.sedekahPercent / 100);
+            }
+
+            if (sBox) sBox.innerText = formatRupiah(sedekahUnpaid);
+            if (sBtn) {
+                if (sedekahUnpaid > 0) {
+                    sBtn.disabled = false;
+                    sBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 rounded-lg text-xs transition-all shadow-md cursor-pointer";
+                } else {
+                    sBtn.disabled = true;
+                    sBtn.className = "w-full bg-purple-700 text-white font-bold py-2 rounded-lg text-xs opacity-50 cursor-not-allowed";
+                }
             }
         }
 
-        function executeZISCalculation() {
-            let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
-            const nishobBulanan = 6875000;
-            let recordCount = 0;
+        // Tombol Khusus Membayar ZIS (Reset nominal ke 0 dan catat ke transaksi)
+        function payZIS(type) {
+            const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
+            const nishobBulanan = 7640144;
+            let amountToPay = 0;
+            let categoryName = "";
+
+            if (type === 'zakat') {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.zakatLastPaidIndex);
+                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                amountToPay = sumUnpaid * 0.025;
+                categoryName = "Pembayaran Zakat Penghasilan (Baznas)";
+                appState.zisPaidIds.zakatLastPaidIndex = incomes.length; // Tandai sudah dibayar sampai pemasukan terbaru saat ini
+            } else if (type === 'infaq') {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.infaqLastPaidIndex);
+                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                amountToPay = sumUnpaid * (appState.zisConfig.infaqPercent / 100);
+                categoryName = `Pembayaran Infaq (${appState.zisConfig.infaqPercent}%)`;
+                appState.zisPaidIds.infaqLastPaidIndex = incomes.length;
+            } else if (type === 'sedekah') {
+                const unpaidIncomes = incomes.slice(appState.zisPaidIds.sedekahLastPaidIndex);
+                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                amountToPay = sumUnpaid * (appState.zisConfig.sedekahPercent / 100);
+                categoryName = `Pembayaran Sedekah (${appState.zisConfig.sedekahPercent}%)`;
+                appState.zisPaidIds.sedekahLastPaidIndex = incomes.length;
+            }
+
+            if (amountToPay <= 0) return;
+
             const today = new Date().toISOString().split('T')[0];
 
-            // 1. Zakat
-            if (appState.zisConfig.zakatActive && totalIncome >= nishobBulanan) {
-                let zakatAmount = totalIncome * 0.025;
-                appState.transactions.unshift({
-                    id: 'zis_zakat_' + Date.now(),
-                    type: 'zis',
-                    category: 'Zakat Penghasilan (Baznas)',
-                    amount: zakatAmount,
-                    date: today,
-                    desc: 'Kalkulasi otomatis 2.5% dari pemasukan'
-                });
-                recordCount++;
-            }
+            // Catat pembayaran resmi ke dalam riwayat transaksi
+            appState.transactions.unshift({
+                id: 'zis_pay_' + Date.now(),
+                type: 'zis',
+                category: categoryName,
+                amount: amountToPay,
+                date: today,
+                desc: 'Ditunaikan secara resmi (Reset ke Rp 0)'
+            });
 
-            // 2. Infaq
-            if (appState.zisConfig.infaqActive && totalIncome > 0) {
-                let infaqAmount = totalIncome * (appState.zisConfig.infaqPercent / 100);
-                appState.transactions.unshift({
-                    id: 'zis_infaq_' + Date.now(),
-                    type: 'zis',
-                    category: 'Infaq Bulanan',
-                    amount: infaqAmount,
-                    date: today,
-                    desc: `Kalkulasi ${appState.zisConfig.infaqPercent}% dari pemasukan`
-                });
-                recordCount++;
-            }
-
-            // 3. Sedekah
-            if (appState.zisConfig.sedekahActive && totalIncome > 0) {
-                let sedekahAmount = totalIncome * (appState.zisConfig.sedekahPercent / 100);
-                appState.transactions.unshift({
-                    id: 'zis_sedekah_' + Date.now(),
-                    type: 'zis',
-                    category: 'Sedekah Bulanan',
-                    amount: sedekahAmount,
-                    date: today,
-                    desc: `Kalkulasi ${appState.zisConfig.sedekahPercent}% dari pemasukan`
-                });
-                recordCount++;
-            }
-
-            if (recordCount > 0) {
-                saveToStorage();
-                refreshAppUI();
-                showToast(`Berhasil mencatat ${recordCount} pos ZIS ke dalam riwayat!`);
-            } else {
-                showModal("Informasi ZIS", "Tidak ada ZIS yang dicatat. Pastikan menu aktif dan total pemasukan mencukupi ketentuan.", false);
-            }
+            saveToStorage();
+            refreshAppUI();
+            showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Nominal saat ini kembali menjadi Rp 0 dan akan terakumulasi kembali secara otomatis dari pemasukan baru berikutnya.`);
         }
 
         function renderRecentTransactions() {
@@ -1186,14 +1261,12 @@
 
             let filtered = [...appState.transactions];
 
-            // Filter Jenis Transaksi (Termasuk ZIS)
             if (typeFilter !== 'all') {
                 if (typeFilter === 'tabungan') filtered = filtered.filter(t => t.type === 'tabungan');
                 else if (typeFilter === 'zis') filtered = filtered.filter(t => t.type === 'zis');
                 else filtered = filtered.filter(t => t.type === typeFilter);
             }
 
-            // Filter Waktu (Hari Ini, Minggu Ini, Bulan Ini, Tanggal Tertentu)
             const now = new Date();
             const todayStr = now.toISOString().split('T')[0];
 
@@ -1211,7 +1284,6 @@
                 filtered = filtered.filter(t => t.date === customDateVal);
             }
 
-            // Sorting
             if (sortFilter === 'newest') {
                 filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
             } else if (sortFilter === 'oldest') {
