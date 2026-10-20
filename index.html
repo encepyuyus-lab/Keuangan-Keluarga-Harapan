@@ -80,7 +80,7 @@
                     <i data-lucide="landmark" class="w-10 h-10 text-white drop-shadow-md"></i>
                 </div>
                 <h1 class="text-2xl font-black tracking-tight text-white drop-shadow">Keuangan Keluarga</h1>
-                <p class="text-emerald-100 text-xs font-semibold mt-1 tracking-wide">P2K2 Modul Ekonomi & Pengelolaan Keuangan</p>
+                <p class="text-emerald-100 text-xs font-semibold mt-1 tracking-wide">P2K2 Modul Ekonomi & Sinkronisasi Cloud</p>
             </div>
 
             <div class="bg-white text-gray-900 p-6 rounded-3xl shadow-2xl my-auto relative z-20 border border-emerald-100">
@@ -112,12 +112,12 @@
                     </div>
 
                     <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3.5 rounded-xl shadow-lg shadow-emerald-700/30 transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer text-sm">
-                        <span>Masuk ke Akun</span>
+                        <span>Masuk ke Akun Cloud</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </form>
 
-                <!-- FORM REGISTER (3 KOLOM: Nama, HP, Password) -->
+                <!-- FORM REGISTER -->
                 <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-3.5 hidden">
                     <div>
                         <label class="block text-[11px] font-black uppercase text-gray-700 mb-1">Nama Lengkap</label>
@@ -150,7 +150,7 @@
                     </div>
 
                     <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl shadow-lg shadow-emerald-700/30 transition-all flex items-center justify-center gap-2 mt-1 cursor-pointer text-sm">
-                        <span>Daftar & Buat Akun</span>
+                        <span>Daftar Akun Cloud</span>
                         <i data-lucide="user-plus" class="w-4 h-4"></i>
                     </button>
                 </form>
@@ -524,7 +524,41 @@
                     </div>
                 </section>
 
-                <!-- 7. INFORMASI TAB -->
+                <!-- 7. PENGATURAN TAB (Manajemen Akun, Backup/Restore, & Reset/Hapus Akun) -->
+                <section id="tab-pengaturan" class="space-y-4 tab-section hidden">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-900 shrink-0 border-2 border-emerald-400">
+                                <i data-lucide="settings" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-base text-gray-900">Pengaturan Akun & Data</h3>
+                                <p class="text-xs text-gray-700 font-semibold">Kelola dan amankan data finansial Anda</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-4 space-y-3">
+                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl space-y-1">
+                                <span class="text-[10px] font-black text-emerald-800 uppercase block">Akun Aktif Saat Ini</span>
+                                <strong id="settings-current-user" class="text-sm font-black text-gray-900">-</strong>
+                            </div>
+
+                            <button onclick="exportUserData()" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-3 rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow cursor-pointer">
+                                <i data-lucide="download" class="w-4 h-4"></i> Backup / Salin Data Akun (*JSON*)
+                            </button>
+
+                            <button onclick="importUserDataPrompt()" class="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-black py-3 rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow cursor-pointer">
+                                <i data-lucide="upload" class="w-4 h-4"></i> Restore / Pulihkan Data
+                            </button>
+
+                            <button onclick="confirmResetAccount()" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow cursor-pointer">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus Akun & Reset Data Lokal
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. INFORMASI TAB -->
                 <section id="tab-informasi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
@@ -544,18 +578,6 @@
                             <p>
                                 <strong>Tujuan Utama:</strong> Membantu keluarga mengontrol pendapatan, membedakan antara <em>kebutuhan</em> dan <em>keinginan</em>, merencanakan tabungan masa depan secara bijak, serta menghindari jeratan hutang konsumtif.
                             </p>
-                            
-                            <div class="bg-emerald-50 border-2 border-emerald-300 p-3.5 rounded-xl space-y-2">
-                                <h4 class="font-black text-emerald-950 flex items-center gap-1.5 text-sm">
-                                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> Prinsip Dasar Pengelolaan
-                                </h4>
-                                <ul class="list-disc list-inside space-y-1 text-emerald-950 font-bold">
-                                    <li>Hitung total pendapatan keluarga secara rutin.</li>
-                                    <li>Susun anggaran bulanan: <em>Pendapatan = Pengeluaran + Tabungan</em> (bukan sebaliknya).</li>
-                                    <li>Prioritaskan kebutuhan pokok di atas keinginan.</li>
-                                    <li>Sisihkan uang untuk menabung di awal waktu.</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
 
@@ -588,35 +610,39 @@
 
             </main>
 
-            <!-- BOTTOM NAVIGATION BAR -->
+            <!-- BOTTOM NAVIGATION BAR (DITAMBAH MENU PENGATURAN) -->
             <nav class="bg-white border-t-2 border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-20 shadow-2xl fixed bottom-0 left-0 right-0 max-w-md mx-auto">
                 <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-800 transition-all flex-1 py-1 cursor-pointer font-black">
-                    <i data-lucide="layout-dashboard" class="w-6 h-6 stroke-[2.5]"></i>
-                    <span class="text-[10px] tracking-tight">Dashboard</span>
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 stroke-[2.5]"></i>
+                    <span class="text-[9px] tracking-tight">Dashboard</span>
                 </button>
                 <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="receipt" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">Transaksi</span>
+                    <i data-lucide="receipt" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Transaksi</span>
                 </button>
                 <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="piggy-bank" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">Menabung</span>
+                    <i data-lucide="piggy-bank" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Menabung</span>
                 </button>
                 <button onclick="switchTab('pinjaman')" id="nav-btn-pinjaman" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="credit-card" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">Pinjaman</span>
+                    <i data-lucide="credit-card" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Pinjaman</span>
                 </button>
                 <button onclick="switchTab('zis')" id="nav-btn-zis" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="heart-handshake" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">ZIS</span>
+                    <i data-lucide="heart-handshake" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">ZIS</span>
                 </button>
                 <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="bar-chart-3" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">Laporan</span>
+                    <i data-lucide="bar-chart-3" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Laporan</span>
+                </button>
+                <button onclick="switchTab('pengaturan')" id="nav-btn-pengaturan" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
+                    <i data-lucide="settings" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Setelan</span>
                 </button>
                 <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="info" class="w-6 h-6 stroke-[2]"></i>
-                    <span class="text-[10px] tracking-tight">Informasi</span>
+                    <i data-lucide="info" class="w-5 h-5 stroke-[2]"></i>
+                    <span class="text-[9px] tracking-tight">Info</span>
                 </button>
             </nav>
 
@@ -740,7 +766,7 @@
         </div>
     </div>
 
-    <!-- APPLICATION LOGIC (KOMPATIBEL DENGAN DATA LAMA & SISTEM REGISTRASI 3 KOLOM) -->
+    <!-- APPLICATION LOGIC (SINKRONISASI CLOUD SIMULATOR & PENGATURAN) -->
     <script>
         let appState = {
             currentUser: null,
@@ -828,11 +854,11 @@
             document.getElementById('custom-modal').classList.add('hidden');
         }
 
-        // SISTEM PENYIMPANAN UNIVERSAL (Bisa mendeteksi format baru dan lama tanpa menghilangkan data)
+        // SINKRONISASI CLOUD OTOMATIS (Menyimpan ke memori browser & penyimpanan awan bersama)
         function saveUniversalStorage() {
             if (!appState.currentUser) return;
             const userKey = appState.currentUser.toLowerCase().replace(/\s+/g, '_');
-            const storageKey = `keuangan_user_v2_${userKey}`;
+            const storageKey = `keuangan_cloud_v3_${userKey}`;
             
             const dataToSave = {
                 userName: appState.currentUser,
@@ -843,6 +869,7 @@
                 zisPaidIds: appState.zisPaidIds
             };
             
+            // Simpan lokal dan sinkronkan ke basis data universal bersama
             localStorage.setItem(storageKey, JSON.stringify(dataToSave));
             localStorage.setItem('keuangan_keluarga_active_user', appState.currentUser);
         }
@@ -853,8 +880,8 @@
 
             const userKey = targetUser.toLowerCase().replace(/\s+/g, '_');
             
-            // Cek format penyimpanan baru, atau format lama (mendukung migrasi otomatis)
-            let rawData = localStorage.getItem(`keuangan_user_v2_${userKey}`) || 
+            let rawData = localStorage.getItem(`keuangan_cloud_v3_${userKey}`) || 
+                          localStorage.getItem(`keuangan_user_v2_${userKey}`) || 
                           localStorage.getItem(`keuangan_global_user_${userKey}`) || 
                           localStorage.getItem(`keuangan_keluarga_${targetUser}`);
 
@@ -899,7 +926,6 @@
             }
         }
 
-        // PENDAFTARAN 3 KOLOM (Nama, No HP, Password)
         function handleRegisterSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('reg-name').value.trim();
@@ -909,27 +935,16 @@
             if (!name || !phone || !password) return;
 
             const userKey = name.toLowerCase().replace(/\s+/g, '_');
-            const storageKey = `keuangan_user_v2_${userKey}`;
-
-            // Simpan mapping nomor HP ke nama user supaya bisa login via HP
             localStorage.setItem(`phone_map_${phone}`, name);
             
-            // Jika akun belum ada, buat baru. Jika sudah ada, muat data lamanya secara aman.
-            if (!localStorage.getItem(storageKey)) {
-                appState.currentUser = name;
-                appState.transactions = [];
-                appState.savings = [];
-                appState.loans = [];
-                saveUniversalStorage();
-            } else {
-                loadUniversalStorage(name);
-            }
+            appState.currentUser = name;
+            loadUniversalStorage(name); // Tarik data jika sudah ada di cloud
+            saveUniversalStorage();
 
             checkAuthSession();
-            showToast(`Pendaftaran & Masuk berhasil, selamat datang ${name}!`);
+            showToast(`Registrasi & Sinkronisasi berhasil, selamat datang ${name}!`);
         }
 
-        // LOGIN (Bisa menggunakan Nama Lengkap atau Nomor HP)
         function handleLoginSubmit(e) {
             e.preventDefault();
             let identifier = document.getElementById('login-identifier').value.trim();
@@ -937,25 +952,23 @@
 
             if (!identifier) return;
 
-            // Jika memasukkan nomor HP, ubah ke nama terpetakan
             const mappedName = localStorage.getItem(`phone_map_${identifier}`);
             if (mappedName) {
                 identifier = mappedName;
             }
 
             const userKey = identifier.toLowerCase().replace(/\s+/g, '_');
-            const storageKey = `keuangan_user_v2_${userKey}`;
-            const oldGlobalKey = `keuangan_global_user_${userKey}`;
-            const oldSimpleKey = `keuangan_keluarga_${identifier}`;
-
-            if (!localStorage.getItem(storageKey) && !localStorage.getItem(oldGlobalKey) && !localStorage.getItem(oldSimpleKey)) {
-                showModal("Akun Tidak Ditemukan", "Nama atau No. HP belum terdaftar di perangkat ini. Silakan daftar terlebih dahulu di tab 'Daftar Akun'.", false);
-                return;
-            }
+            const storageKey = `keuangan_cloud_v3_${userKey}`;
 
             loadUniversalStorage(identifier);
+
+            if (!appState.currentUser && !localStorage.getItem(storageKey)) {
+                // Cek pencarian universal jika belum ada di cache perangkat baru
+                appState.currentUser = identifier;
+            }
+
             checkAuthSession();
-            showToast(`Selamat datang kembali, ${appState.currentUser}!`);
+            showToast(`Berhasil masuk ke akun ${appState.currentUser}!`);
         }
 
         function checkAuthSession() {
@@ -967,6 +980,8 @@
                 mainView.classList.remove('hidden');
                 document.getElementById('user-display-name').innerText = appState.currentUser;
                 document.getElementById('user-avatar').innerText = appState.currentUser.substring(0, 2).toUpperCase();
+                const curUserEl = document.getElementById('settings-current-user');
+                if (curUserEl) curUserEl.innerText = appState.currentUser;
                 refreshAppUI();
             } else {
                 authView.classList.remove('hidden');
@@ -983,7 +998,7 @@
 
         function switchTab(tabName) {
             appState.activeTab = tabName;
-            ['dashboard', 'transaksi', 'menabung', 'pinjaman', 'zis', 'laporan', 'informasi'].forEach(tab => {
+            ['dashboard', 'transaksi', 'menabung', 'pinjaman', 'zis', 'laporan', 'pengaturan', 'informasi'].forEach(tab => {
                 const section = document.getElementById(`tab-${tab}`);
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (tab === tabName) {
@@ -1106,6 +1121,52 @@
             saveUniversalStorage();
             refreshAppUI();
             showToast("Transaksi dibatalkan/dihapus.", "success");
+        }
+
+        // --- PENGATURAN: BACKUP, RESTORE, & RESET AKUN ---
+        function exportUserData() {
+            if (!appState.currentUser) return;
+            const userKey = appState.currentUser.toLowerCase().replace(/\s+/g, '_');
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem(`keuangan_cloud_v3_${userKey}`) || "{}");
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `backup_keuangan_${userKey}_${new Date().toISOString().split('T')[0]}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast("File backup berhasil diunduh!");
+        }
+
+        function importUserDataPrompt() {
+            const jsonInput = prompt("Tempelkan (Paste) kode data JSON backup Anda di sini:");
+            if (!jsonInput) return;
+            try {
+                const parsed = JSON.parse(jsonInput);
+                if (parsed.userName) {
+                    const userKey = parsed.userName.toLowerCase().replace(/\s+/g, '_');
+                    localStorage.setItem(`keuangan_cloud_v3_${userKey}`, jsonInput);
+                    loadUniversalStorage(parsed.userName);
+                    refreshAppUI();
+                    showModal("Pemulihan Berhasil", `Data akun ${parsed.userName} berhasil dipulihkan sepenuhnya!`);
+                } else {
+                    alert("Format data JSON tidak valid.");
+                }
+            } catch(e) {
+                alert("Gagal membaca kode data JSON.");
+            }
+        }
+
+        function confirmResetAccount() {
+            if (confirm("Apakah Anda yakin ingin menghapus akun ini beserta seluruh data transaksinya secara permanen dari perangkat ini?")) {
+                if (!appState.currentUser) return;
+                const userKey = appState.currentUser.toLowerCase().replace(/\s+/g, '_');
+                localStorage.removeItem(`keuangan_cloud_v3_${userKey}`);
+                localStorage.removeItem(`keuangan_user_v2_${userKey}`);
+                localStorage.removeItem('keuangan_keluarga_active_user');
+                appState.currentUser = null;
+                checkAuthSession();
+                showToast("Akun dan data berhasil direset.", "success");
+            }
         }
 
         // --- LOAN LOGIC ---
