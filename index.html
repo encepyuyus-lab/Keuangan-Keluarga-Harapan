@@ -279,7 +279,47 @@
                     <div id="savings-list" class="space-y-4"></div>
                 </section>
 
-                <!-- 4. MENU ZIS (Zakat, Infaq, Sedekah Bulanan) -->
+                <!-- 4. MENU PINJAMAN (Cermat Meminjam & Cermat Meminjamkan) -->
+                <section id="tab-pinjaman" class="space-y-4 tab-section hidden">
+                    <div class="flex bg-gray-200 p-1 rounded-xl">
+                        <button type="button" onclick="setLoanTab('minjam')" id="loan-tab-minjam" class="flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
+                            <i data-lucide="credit-card" class="w-4 h-4"></i> Cermat Meminjam
+                        </button>
+                        <button type="button" onclick="setLoanTab('meminjamkan')" id="loan-tab-meminjamkan" class="flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer">
+                            <i data-lucide="hand-coins" class="w-4 h-4"></i> Cermat Meminjamkan
+                        </button>
+                    </div>
+
+                    <!-- SUB-TAB 1: CERMAT MEMINJAM -->
+                    <div id="sub-loan-minjam" class="space-y-3">
+                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Daftar Pinjaman Keluarga</h4>
+                                <p class="text-[11px] text-gray-500">Kelola pinjaman secara bijak & terarah</p>
+                            </div>
+                            <button onclick="openLoanModal('minjam')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Tambah
+                            </button>
+                        </div>
+                        <div id="list-loan-minjam" class="space-y-3"></div>
+                    </div>
+
+                    <!-- SUB-TAB 2: CERMAT MEMINJAMKAN -->
+                    <div id="sub-loan-meminjamkan" class="space-y-3 hidden">
+                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Daftar Piutang (Meminjamkan)</h4>
+                                <p class="text-[11px] text-gray-500">Catat bantuan / piutang ke orang lain</p>
+                            </div>
+                            <button onclick="openLoanModal('meminjamkan')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Tambah
+                            </button>
+                        </div>
+                        <div id="list-loan-meminjamkan" class="space-y-3"></div>
+                    </div>
+                </section>
+
+                <!-- 5. MENU ZIS -->
                 <section id="tab-zis" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
@@ -293,8 +333,6 @@
                         </div>
 
                         <div class="border-t border-gray-200 pt-3 space-y-4 text-xs">
-                            
-                            <!-- 1. ZAKAT PENGHASILAN BAZNAS (SK No. 15 Tahun 2026: Rp 7.640.144/bulan) -->
                             <div class="bg-emerald-50/60 border border-emerald-200 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -307,7 +345,7 @@
                                     </label>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed text-[11px]">
-                                    SK BAZNAS No. 15 Tahun 2026: Nisab Rp 7.640.144/bulan. Ketika tombol aktif, sistem mulai mencatat 2.5% dari pemasukan baru.
+                                    SK BAZNAS No. 15 Tahun 2026: Nisab Rp 7.640.144/bulan. Jika aktif, sistem mulai mencatat 2.5% dari pemasukan baru.
                                 </p>
                                 <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-2">
                                     <div class="flex justify-between items-center font-bold">
@@ -320,7 +358,6 @@
                                 </div>
                             </div>
 
-                            <!-- 2. INFAQ BULANAN -->
                             <div class="bg-blue-50/60 border border-blue-200 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -350,7 +387,6 @@
                                 </div>
                             </div>
 
-                            <!-- 3. SEDEKAH BULANAN -->
                             <div class="bg-purple-50/60 border border-purple-200 p-4 rounded-2xl space-y-3">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -379,12 +415,11 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
 
-                <!-- 5. LAPORAN TAB -->
+                <!-- 6. LAPORAN TAB -->
                 <section id="tab-laporan" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                         <h3 class="font-bold text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
@@ -398,6 +433,7 @@
                                     <option value="pengeluaran">Pengeluaran</option>
                                     <option value="tabungan">Setoran Tabungan</option>
                                     <option value="zis">ZIS (Zakat/Infaq/Sedekah)</option>
+                                    <option value="pinjaman">Pinjaman / Piutang</option>
                                 </select>
                             </div>
                             <div>
@@ -410,7 +446,6 @@
                             </div>
                         </div>
 
-                        <!-- Filter Waktu Lengkap -->
                         <div class="space-y-2 pt-1">
                             <div>
                                 <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Periode Waktu</label>
@@ -452,7 +487,7 @@
                     </div>
                 </section>
 
-                <!-- 6. INFORMASI TAB -->
+                <!-- 7. INFORMASI TAB -->
                 <section id="tab-informasi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
@@ -516,7 +551,7 @@
 
             </main>
 
-            <!-- BOTTOM NAVIGATION BAR -->
+            <!-- BOTTOM NAVIGATION BAR (Ditambah Menu Pinjaman) -->
             <nav class="bg-white border-t border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
                 <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
@@ -529,6 +564,10 @@
                 <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
                     <i data-lucide="piggy-bank" class="w-4 h-4"></i>
                     <span class="text-[9px]">Menabung</span>
+                </button>
+                <button onclick="switchTab('pinjaman')" id="nav-btn-pinjaman" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
+                    <i data-lucide="credit-card" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Pinjaman</span>
                 </button>
                 <button onclick="switchTab('zis')" id="nav-btn-zis" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
                     <i data-lucide="heart-handshake" class="w-4 h-4"></i>
@@ -591,6 +630,61 @@
         </div>
     </div>
 
+    <!-- MODAL: ADD LOAN (PINJAM / MEMINJAMKAN) -->
+    <div id="loan-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                <h3 id="loan-modal-title" class="font-bold text-base text-gray-900">Form Pinjaman</h3>
+                <button onclick="closeLoanModal()" class="p-1 text-gray-500 hover:text-gray-800 rounded-lg cursor-pointer">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="loan-form" onsubmit="handleLoanSubmit(event)" class="space-y-3">
+                <input type="hidden" id="loan-mode" value="minjam">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1" id="loan-label-entity">Kepada Siapa Meminjam?</label>
+                    <input type="text" id="loan-entity" required placeholder="Contoh: Koperasi / Saudara" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Tujuan Meminjam / Meminjamkan</label>
+                    <input type="text" id="loan-purpose" required placeholder="Contoh: Modal Usaha / Biaya Darurat" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Besaran Nominal (Rp)</label>
+                        <input type="number" id="loan-amount" min="1000" required placeholder="500000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Lama Waktu</label>
+                        <input type="text" id="loan-duration" required placeholder="Contoh: 6 Bulan" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Target Periode Membayar</label>
+                    <select id="loan-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <option value="Bulanan">Bulanan</option>
+                        <option value="Mingguan">Mingguan</option>
+                        <option value="Harian">Harian</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Sedekah Pinjaman / Keringanan (Opsional)</label>
+                    <input type="text" id="loan-charity" placeholder="Contoh: Bebas bunga / Infaq jika mampu" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeLoanModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl text-sm transition-all cursor-pointer">Batal</button>
+                    <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL: CUSTOM MESSAGE BOX -->
     <div id="custom-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl text-center space-y-4">
@@ -610,8 +704,10 @@
             authMode: 'login',
             activeTab: 'dashboard',
             txType: 'pemasukan',
+            loanTab: 'minjam',
             transactions: [],
             savings: [],
+            loans: [], // Menyimpan data pinjam & meminjam
             zisConfig: {
                 zakatActive: false,
                 infaqActive: false,
@@ -695,6 +791,7 @@
             localStorage.setItem(key, JSON.stringify({
                 transactions: appState.transactions,
                 savings: appState.savings,
+                loans: appState.loans,
                 zisConfig: appState.zisConfig,
                 zisPaidIds: appState.zisPaidIds
             }));
@@ -704,9 +801,10 @@
             const lastUser = localStorage.getItem('keuangan_keluarga_active_user');
             if (lastUser) {
                 appState.currentUser = lastUser;
-                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[], "zisConfig":{}, "zisPaidIds":{}}');
+                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[], "loans":[], "zisConfig":{}, "zisPaidIds":{}}');
                 appState.transactions = data.transactions || [];
                 appState.savings = data.savings || [];
+                appState.loans = data.loans || [];
                 appState.zisConfig = Object.assign({
                     zakatActive: false,
                     infaqActive: false,
@@ -784,7 +882,7 @@
 
         function switchTab(tabName) {
             appState.activeTab = tabName;
-            ['dashboard', 'transaksi', 'menabung', 'zis', 'laporan', 'informasi'].forEach(tab => {
+            ['dashboard', 'transaksi', 'menabung', 'pinjaman', 'zis', 'laporan', 'informasi'].forEach(tab => {
                 const section = document.getElementById(`tab-${tab}`);
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (tab === tabName) {
@@ -797,6 +895,7 @@
             });
             document.getElementById('main-content-scroll').scrollTop = 0;
             if (tabName === 'zis') syncZISUI();
+            if (tabName === 'pinjaman') renderLoans();
             if (tabName === 'laporan') renderReports();
         }
 
@@ -828,6 +927,7 @@
             renderRecentTransactions();
             renderTransactionHistory();
             renderSavingsPlans();
+            renderLoans();
             syncZISUI();
             lucide.createIcons();
         }
@@ -907,7 +1007,139 @@
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
 
-        // --- ZIS REALTIME LOGIC DENGAN ATURAN BAZNAS SK NO 15 TAHUN 2026 & TOMBOL BAYAR KHUSUS ---
+        // --- LOAN (PINJAMAN / PIUTANG) LOGIC ---
+        function setLoanTab(tab) {
+            appState.loanTab = tab;
+            const btnMinjam = document.getElementById('loan-tab-minjam');
+            const btnMeminjamkan = document.getElementById('loan-tab-meminjamkan');
+            const subMinjam = document.getElementById('sub-loan-minjam');
+            const subMeminjamkan = document.getElementById('sub-loan-meminjamkan');
+
+            if (tab === 'minjam') {
+                btnMinjam.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMeminjamkan.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                subMinjam.classList.remove('hidden');
+                subMeminjamkan.classList.add('hidden');
+            } else {
+                btnMeminjamkan.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer";
+                btnMinjam.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-600 transition-all flex items-center justify-center gap-1 cursor-pointer";
+                subMeminjamkan.classList.remove('hidden');
+                subMinjam.classList.add('hidden');
+            }
+        }
+
+        function openLoanModal(mode) {
+            appState.loanMode = mode;
+            const titleEl = document.getElementById('loan-modal-title');
+            const labelEntity = document.getElementById('loan-label-entity');
+            document.getElementById('loan-mode').value = mode;
+
+            if (mode === 'minjam') {
+                titleEl.innerText = "Cermat Meminjam";
+                labelEntity.innerText = "Kepada Siapa Meminjam?";
+            } else {
+                titleEl.innerText = "Cermat Meminjamkan";
+                labelEntity.innerText = "Siapa yang Meminjam?";
+            }
+
+            document.getElementById('loan-form').reset();
+            document.getElementById('loan-modal').classList.remove('hidden');
+        }
+
+        function closeLoanModal() {
+            document.getElementById('loan-modal').classList.add('hidden');
+        }
+
+        function handleLoanSubmit(e) {
+            e.preventDefault();
+            const mode = document.getElementById('loan-mode').value;
+            const entity = document.getElementById('loan-entity').value.trim();
+            const purpose = document.getElementById('loan-purpose').value.trim();
+            const amount = parseFloat(document.getElementById('loan-amount').value);
+            const duration = document.getElementById('loan-duration').value.trim();
+            const frequency = document.getElementById('loan-frequency').value;
+            const charity = document.getElementById('loan-charity').value.trim() || 'Tidak ada';
+
+            const newLoan = {
+                id: 'loan_' + Date.now(),
+                mode, // 'minjam' or 'meminjamkan'
+                entity,
+                purpose,
+                amount,
+                duration,
+                frequency,
+                charity,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            appState.loans.unshift(newLoan);
+            saveToStorage();
+            refreshAppUI();
+            closeLoanModal();
+            showToast("Rencana pinjaman berhasil dicatat!");
+        }
+
+        function deleteLoan(id) {
+            appState.loans = appState.loans.filter(l => l.id !== id);
+            saveToStorage();
+            refreshAppUI();
+            showToast("Catatan pinjaman dihapus.", "success");
+        }
+
+        function renderLoans() {
+            const minjamContainer = document.getElementById('list-loan-minjam');
+            const meminjamkanContainer = document.getElementById('list-loan-meminjamkan');
+
+            const minjams = appState.loans.filter(l => l.mode === 'minjam');
+            const meminjamkans = appState.loans.filter(l => l.mode === 'meminjamkan');
+
+            if (minjams.length === 0) {
+                minjamContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjam. Pastikan meminjam hanya untuk keperluan produktif/mendesak.</div>`;
+            } else {
+                minjamContainer.innerHTML = minjams.map(l => `
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-2 text-xs">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-[10px]">Meminjam Ke: ${l.entity}</span>
+                                <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                            </div>
+                            <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                            <div>Nominal: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
+                            <div>Waktu: <strong class="text-gray-900">${l.duration}</strong></div>
+                            <div>Cicilan: <strong class="text-gray-900">${l.frequency}</strong></div>
+                            <div>Sedekah/Keringanan: <strong class="text-emerald-700">${l.charity}</strong></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            if (meminjamkans.length === 0) {
+                meminjamkanContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjamkan. Catat piutang atau bantuan dengan bijak.</div>`;
+            } else {
+                meminjamkanContainer.innerHTML = meminjamkans.map(l => `
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-2 text-xs">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">Peminjam: ${l.entity}</span>
+                                <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                            </div>
+                            <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                            <div>Nominal: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
+                            <div>Waktu: <strong class="text-gray-900">${l.duration}</strong></div>
+                            <div>Target: <strong class="text-gray-900">${l.frequency}</strong></div>
+                            <div>Sedekah Pinjaman: <strong class="text-emerald-700">${l.charity}</strong></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        // --- ZIS LOGIC ---
         function syncZISUI() {
             const zCheckbox = document.getElementById('zakat-active');
             const iCheckbox = document.getElementById('infaq-active');
@@ -936,14 +1168,11 @@
         }
 
         function calculateZISUnpaid() {
-            // Ambil daftar pemasukan yang belum dibayarkan ZIS-nya berdasarkan index terakhir pembayaran
             const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
-            
-            // Nishob Zakat Penghasilan Baznas Terbaru (SK No. 15 Tahun 2026: Rp 7.640.144 / bulan)
-            const nishobBulanan = 7640144;
+            const nishobBulanan = 7640144; // SK BAZNAS No. 15 Tahun 2026
             let totalIncomeAll = incomes.reduce((acc, t) => acc + t.amount, 0);
 
-            // 1. Zakat Calculation (Hanya dari pemasukan setelah index terakhir dibayar jika aktif)
+            // Zakat
             let zakatUnpaid = 0;
             const zBox = document.getElementById('zakat-unpaid-amount');
             const zBtn = document.getElementById('btn-pay-zakat');
@@ -951,7 +1180,7 @@
             if (appState.zisConfig.zakatActive && totalIncomeAll >= nishobBulanan) {
                 const unpaidIncomes = incomes.slice(appState.zisPaidIds.zakatLastPaidIndex);
                 let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
-                zakatUnpaid = sumUnpaidIncome * 0.025; // 2.5%
+                zakatUnpaid = sumUnpaidIncome * 0.025;
             }
 
             if (zBox) zBox.innerText = formatRupiah(zakatUnpaid);
@@ -965,7 +1194,7 @@
                 }
             }
 
-            // 2. Infaq Calculation
+            // Infaq
             let infaqUnpaid = 0;
             const iBox = document.getElementById('infaq-unpaid-amount');
             const iBtn = document.getElementById('btn-pay-infaq');
@@ -987,7 +1216,7 @@
                 }
             }
 
-            // 3. Sedekah Calculation
+            // Sedekah
             let sedekahUnpaid = 0;
             const sBox = document.getElementById('sedekah-unpaid-amount');
             const sBtn = document.getElementById('btn-pay-sedekah');
@@ -1010,10 +1239,8 @@
             }
         }
 
-        // Tombol Khusus Membayar ZIS (Reset nominal ke 0 dan catat ke transaksi)
         function payZIS(type) {
             const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
-            const nishobBulanan = 7640144;
             let amountToPay = 0;
             let categoryName = "";
 
@@ -1022,7 +1249,7 @@
                 let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
                 amountToPay = sumUnpaid * 0.025;
                 categoryName = "Pembayaran Zakat Penghasilan (Baznas)";
-                appState.zisPaidIds.zakatLastPaidIndex = incomes.length; // Tandai sudah dibayar sampai pemasukan terbaru saat ini
+                appState.zisPaidIds.zakatLastPaidIndex = incomes.length;
             } else if (type === 'infaq') {
                 const unpaidIncomes = incomes.slice(appState.zisPaidIds.infaqLastPaidIndex);
                 let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
@@ -1040,8 +1267,6 @@
             if (amountToPay <= 0) return;
 
             const today = new Date().toISOString().split('T')[0];
-
-            // Catat pembayaran resmi ke dalam riwayat transaksi
             appState.transactions.unshift({
                 id: 'zis_pay_' + Date.now(),
                 type: 'zis',
@@ -1053,7 +1278,7 @@
 
             saveToStorage();
             refreshAppUI();
-            showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Nominal saat ini kembali menjadi Rp 0 dan akan terakumulasi kembali secara otomatis dari pemasukan baru berikutnya.`);
+            showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Nominal saat ini kembali menjadi Rp 0 dan akan terakumulasi kembali dari pemasukan baru berikutnya.`);
         }
 
         function renderRecentTransactions() {
@@ -1264,6 +1489,7 @@
             if (typeFilter !== 'all') {
                 if (typeFilter === 'tabungan') filtered = filtered.filter(t => t.type === 'tabungan');
                 else if (typeFilter === 'zis') filtered = filtered.filter(t => t.type === 'zis');
+                else if (typeFilter === 'pinjaman') filtered = filtered.filter(t => t.type === 'pinjaman');
                 else filtered = filtered.filter(t => t.type === typeFilter);
             }
 
