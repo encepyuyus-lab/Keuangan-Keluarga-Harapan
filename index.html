@@ -740,7 +740,7 @@
         </div>
     </div>
 
-    <!-- APPLICATION LOGIC (SISTEM REGISTRASI 3 KOLOM & LOGIN Fleksibel Nama/HP) -->
+    <!-- APPLICATION LOGIC (KOMPATIBEL DENGAN DATA LAMA & SISTEM REGISTRASI 3 KOLOM) -->
     <script>
         let appState = {
             currentUser: null,
@@ -788,7 +788,7 @@
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadGlobalStorage();
+            loadUniversalStorage();
             lucide.createIcons();
             initDateFields();
             checkAuthSession();
@@ -828,9 +828,12 @@
             document.getElementById('custom-modal').classList.add('hidden');
         }
 
-        function saveGlobalStorage() {
+        // SISTEM PENYIMPANAN UNIVERSAL (Bisa mendeteksi format baru dan lama tanpa menghilangkan data)
+        function saveUniversalStorage() {
             if (!appState.currentUser) return;
-            const key = `keuangan_user_v2_${appState.currentUser.toLowerCase().replace(/\s+/g, '_')}`;
+            const userKey = appState.currentUser.toLowerCase().replace(/\s+/g, '_');
+            const storageKey = `keuangan_user_v2_${userKey}`;
+            
             const dataToSave = {
                 userName: appState.currentUser,
                 transactions: appState.transactions,
@@ -839,15 +842,24 @@
                 zisConfig: appState.zisConfig,
                 zisPaidIds: appState.zisPaidIds
             };
-            localStorage.setItem(key, JSON.stringify(dataToSave));
+            
+            localStorage.setItem(storageKey, JSON.stringify(dataToSave));
             localStorage.setItem('keuangan_keluarga_active_user', appState.currentUser);
         }
 
-        function loadGlobalStorage(usernameKey = null) {
+        function loadUniversalStorage(usernameKey = null) {
             const targetUser = usernameKey || localStorage.getItem('keuangan_keluarga_active_user');
-            if (targetUser) {
-                const key = `keuangan_user_v2_${targetUser.toLowerCase().replace(/\s+/g, '_')}`;
-                const data = JSON.parse(localStorage.getItem(key) || '{"transactions":[], "savings":[], "loans":[], "zisConfig":{}, "zisPaidIds":{}}');
+            if (!targetUser) return;
+
+            const userKey = targetUser.toLowerCase().replace(/\s+/g, '_');
+            
+            // Cek format penyimpanan baru, atau format lama (mendukung migrasi otomatis)
+            let rawData = localStorage.getItem(`keuangan_user_v2_${userKey}`) || 
+                          localStorage.getItem(`keuangan_global_user_${userKey}`) || 
+                          localStorage.getItem(`keuangan_keluarga_${targetUser}`);
+
+            if (rawData) {
+                const data = JSON.parse(rawData);
                 appState.currentUser = data.userName || targetUser;
                 appState.transactions = data.transactions || [];
                 appState.savings = data.savings || [];
@@ -887,7 +899,7 @@
             }
         }
 
-        // PENDAFTARAN BARU (MENGGUNAKAN 3 KOLOM: Nama, HP, Password)
+        // PENDAFTARAN 3 KOLOM (Nama, No HP, Password)
         function handleRegisterSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('reg-name').value.trim();
@@ -899,26 +911,25 @@
             const userKey = name.toLowerCase().replace(/\s+/g, '_');
             const storageKey = `keuangan_user_v2_${userKey}`;
 
-            // Cek apakah akun sudah terdaftar
-            if (localStorage.getItem(storageKey)) {
-                showModal("Akun Sudah Terdaftar", "Nama lengkap tersebut sudah terdaftar di sistem. Silakan langsung masuk menggunakan menu Masuk.", false);
-                return;
-            }
-
             // Simpan mapping nomor HP ke nama user supaya bisa login via HP
             localStorage.setItem(`phone_map_${phone}`, name);
             
-            appState.currentUser = name;
-            appState.transactions = [];
-            appState.savings = [];
-            appState.loans = [];
-            
-            saveGlobalStorage();
+            // Jika akun belum ada, buat baru. Jika sudah ada, muat data lamanya secara aman.
+            if (!localStorage.getItem(storageKey)) {
+                appState.currentUser = name;
+                appState.transactions = [];
+                appState.savings = [];
+                appState.loans = [];
+                saveUniversalStorage();
+            } else {
+                loadUniversalStorage(name);
+            }
+
             checkAuthSession();
-            showToast(`Pendaftaran berhasil! Selamat datang, ${name}.`);
+            showToast(`Pendaftaran & Masuk berhasil, selamat datang ${name}!`);
         }
 
-        // LOGIN (Bisa pakai Nama atau Nomor HP)
+        // LOGIN (Bisa menggunakan Nama Lengkap atau Nomor HP)
         function handleLoginSubmit(e) {
             e.preventDefault();
             let identifier = document.getElementById('login-identifier').value.trim();
@@ -926,7 +937,7 @@
 
             if (!identifier) return;
 
-            // Periksa apakah login menggunakan Nomor HP, jika ya petakan ke Nama aslinya
+            // Jika memasukkan nomor HP, ubah ke nama terpetakan
             const mappedName = localStorage.getItem(`phone_map_${identifier}`);
             if (mappedName) {
                 identifier = mappedName;
@@ -934,13 +945,15 @@
 
             const userKey = identifier.toLowerCase().replace(/\s+/g, '_');
             const storageKey = `keuangan_user_v2_${userKey}`;
+            const oldGlobalKey = `keuangan_global_user_${userKey}`;
+            const oldSimpleKey = `keuangan_keluarga_${identifier}`;
 
-            if (!localStorage.getItem(storageKey)) {
-                showModal("Akun Tidak Ditemukan", "Nama atau No. HP belum terdaftar. Silakan daftar terlebih dahulu di tab 'Daftar Akun'.", false);
+            if (!localStorage.getItem(storageKey) && !localStorage.getItem(oldGlobalKey) && !localStorage.getItem(oldSimpleKey)) {
+                showModal("Akun Tidak Ditemukan", "Nama atau No. HP belum terdaftar di perangkat ini. Silakan daftar terlebih dahulu di tab 'Daftar Akun'.", false);
                 return;
             }
 
-            loadGlobalStorage(identifier);
+            loadUniversalStorage(identifier);
             checkAuthSession();
             showToast(`Selamat datang kembali, ${appState.currentUser}!`);
         }
@@ -1080,7 +1093,7 @@
             };
 
             appState.transactions.unshift(newTx);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
 
             document.getElementById('tx-form').reset();
@@ -1090,7 +1103,7 @@
 
         function cancelTransaction(id) {
             appState.transactions = appState.transactions.filter(t => t.id !== id);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
@@ -1196,7 +1209,7 @@
             }
 
             appState.loans.unshift(newLoan);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             closeLoanModal();
             showToast("Rencana pinjaman berhasil dicatat & disinkronkan ke Saldo Kas!");
@@ -1240,14 +1253,14 @@
             }
 
             loan.sisaAmount -= payAmount;
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showToast(`Berhasil membayar cicilan sebesar ${formatRupiah(payAmount)}!`);
         }
 
         function deleteLoan(id) {
             appState.loans = appState.loans.filter(l => l.id !== id);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showToast("Catatan pinjaman dihapus.", "success");
         }
@@ -1369,7 +1382,7 @@
             appState.zisConfig.sedekahActive = document.getElementById('sedekah-active').checked;
             appState.zisConfig.sedekahPercent = parseFloat(document.getElementById('sedekah-percent').value) || 0;
 
-            saveGlobalStorage();
+            saveUniversalStorage();
             calculateZISUnpaid();
         }
 
@@ -1479,7 +1492,7 @@
                 desc: 'Ditunaikan secara resmi (Reset ke Rp 0)'
             });
 
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Nominal saat ini kembali menjadi Rp 0 dan akan terakumulasi kembali dari pemasukan baru berikutnya.`);
         }
@@ -1575,7 +1588,7 @@
             };
 
             appState.savings.push(newSavings);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             closeSavingsModal();
             document.getElementById('savings-form').reset();
@@ -1608,14 +1621,14 @@
             };
 
             appState.transactions.unshift(newTx);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showToast(`Berhasil setor cicilan ${formatRupiah(savingsObj.installment)}!`);
         }
 
         function cancelSavings(id) {
             appState.savings = appState.savings.filter(s => s.id !== id);
-            saveGlobalStorage();
+            saveUniversalStorage();
             refreshAppUI();
             showToast("Rencana menabung dibatalkan.", "success");
         }
