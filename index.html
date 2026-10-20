@@ -74,11 +74,10 @@
         
         <div id="toast-container" class="absolute top-4 left-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-        <!-- AUTH VIEW (Dengan Kontras Tajam & Batik) -->
+        <!-- AUTH VIEW -->
         <div id="view-auth" class="flex-1 flex flex-col justify-between p-6 batik-pattern text-white overflow-y-auto relative">
             <div class="pt-6 text-center relative z-10">
-                <!-- Logo Keuangan Mewah & Kontras -->
-                <div class="w-20 h-20 bg-gradient-to-trందిన from-emerald-500 to-teal-400 rounded-3xl mx-auto flex items-center justify-center mb-3 shadow-xl border-2 border-emerald-300">
+                <div class="w-20 h-20 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-3xl mx-auto flex items-center justify-center mb-3 shadow-xl border-2 border-emerald-300">
                     <i data-lucide="landmark" class="w-10 h-10 text-white drop-shadow-md"></i>
                 </div>
                 <h1 class="text-2xl font-black tracking-tight text-white drop-shadow">Keuangan Keluarga</h1>
@@ -86,7 +85,6 @@
             </div>
 
             <div class="bg-white text-gray-900 p-6 rounded-3xl shadow-2xl my-auto relative z-20 border border-emerald-100">
-                <!-- Tab Tombol yang Diperbaiki Total Agar Responsif -->
                 <div class="grid grid-cols-2 border-b border-gray-200 mb-6">
                     <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')" class="pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center">Masuk</button>
                     <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')" class="pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center">Daftar Baru</button>
@@ -282,10 +280,11 @@
                     <div id="savings-list" class="space-y-4"></div>
                 </section>
 
-                <!-- 4. LAPORAN TAB -->
+                <!-- 4. LAPORAN TAB (Dengan Filter Berdasarkan Tanggal, Hari, Minggu, Bulan) -->
                 <section id="tab-laporan" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                         <h3 class="font-bold text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
+                        
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Jenis</label>
@@ -303,6 +302,24 @@
                                     <option value="oldest">Terlama</option>
                                     <option value="highest">Nominal Terbesar</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Filter Waktu (Hari, Minggu, Bulan, Tanggal) -->
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Periode Waktu</label>
+                                <select id="report-filter-time" onchange="toggleDateInput()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                                    <option value="all">Semua Waktu</option>
+                                    <option value="today">Hari Ini</option>
+                                    <option value="week">Minggu Ini</option>
+                                    <option value="month">Bulan Ini</option>
+                                    <option value="custom">Pilih Tanggal</option>
+                                </select>
+                            </div>
+                            <div id="custom-date-wrapper" class="hidden">
+                                <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Pilih Tanggal</label>
+                                <input type="date" id="report-filter-date" onchange="renderReports()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
                             </div>
                         </div>
 
@@ -521,6 +538,8 @@
             const today = new Date().toISOString().split('T')[0];
             const txDateEl = document.getElementById('tx-date');
             if (txDateEl) txDateEl.value = today;
+            const repDateEl = document.getElementById('report-filter-date');
+            if (repDateEl) repDateEl.value = today;
         }
 
         function showToast(message, type = 'success') {
@@ -568,7 +587,7 @@
             }
         }
 
-        // PERBAIKAN UTAMA: Fungsi tab Auth langsung di-bind langsung via JS Event Listener & style state yang jelas
+        // PERBAIKAN TOTAL: Event listener langsung dipasang via JS pada tombol Masuk dan Daftar Baru agar tidak ada kendala klik
         function switchAuthTab(mode) {
             appState.authMode = mode;
             const loginBtn = document.getElementById('tab-login-btn');
@@ -585,6 +604,13 @@
                 submitBtnText.innerText = "Daftar & Masuk";
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginTab = document.getElementById('tab-login-btn');
+            const regTab = document.getElementById('tab-register-btn');
+            if (loginTab) loginTab.addEventListener('click', () => switchAuthTab('login'));
+            if (regTab) regTab.addEventListener('click', () => switchAuthTab('register'));
+        });
 
         function handleAuthSubmit(e) {
             e.preventDefault();
@@ -930,17 +956,53 @@
             }).join('');
         }
 
+        function toggleDateInput() {
+            const timeFilter = document.getElementById('report-filter-time').value;
+            const customWrapper = document.getElementById('custom-date-wrapper');
+            if (timeFilter === 'custom') {
+                customWrapper.classList.remove('hidden');
+            } else {
+                customWrapper.classList.add('hidden');
+            }
+            renderReports();
+        }
+
+        // Fungsi Filter Arus Kas Berdasarkan Tanggal, Hari, Minggu, Bulan
         function renderReports() {
             const typeFilter = document.getElementById('report-filter-type').value;
             const sortFilter = document.getElementById('report-filter-sort').value;
+            const timeFilter = document.getElementById('report-filter-time').value;
+            const customDateVal = document.getElementById('report-filter-date').value;
             const container = document.getElementById('report-transaction-list');
 
             let filtered = [...appState.transactions];
+
+            // Filter Jenis Transaksi
             if (typeFilter !== 'all') {
                 if (typeFilter === 'tabungan') filtered = filtered.filter(t => t.type === 'tabungan');
                 else filtered = filtered.filter(t => t.type === typeFilter);
             }
 
+            // Filter Waktu (Hari, Minggu, Bulan, Tanggal Tertentu)
+            const now = new Date();
+            const todayStr = now.toISOString().split('T')[0];
+
+            if (timeFilter === 'today') {
+                filtered = filtered.filter(t => t.date === todayStr);
+            } else if (timeFilter === 'week') {
+                // Rentang 7 hari terakhir / minggu berjalan
+                const startOfWeek = new Date(now);
+                startOfWeek.setDate(now.getDate() - now.getDay());
+                startOfWeek.setHours(0,0,0,0);
+                filtered = filtered.filter(t => new Date(t.date) >= startOfWeek);
+            } else if (timeFilter === 'month') {
+                const currentMonth = now.toISOString().slice(0, 7); // YYYY-MM
+                filtered = filtered.filter(t => t.date.startsWith(currentMonth));
+            } else if (timeFilter === 'custom' && customDateVal) {
+                filtered = filtered.filter(t => t.date === customDateVal);
+            }
+
+            // Sorting
             if (sortFilter === 'newest') {
                 filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
             } else if (sortFilter === 'oldest') {
@@ -950,7 +1012,7 @@
             }
 
             if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-medium">Tidak ada data transaksi yang sesuai filter.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 font-medium">Tidak ada data transaksi yang sesuai filter waktu & kategori.</p>`;
                 return;
             }
 
