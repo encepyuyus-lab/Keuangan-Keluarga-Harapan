@@ -77,10 +77,10 @@
                 <p class="text-emerald-200 text-sm mt-1">P2K2 Modul Ekonomi & Pengelolaan Keuangan</p>
             </div>
 
-            <div class="bg-white/95 text-gray-900 p-6 rounded-3xl shadow-xl backdrop-blur-sm my-auto">
-                <div class="flex border-b border-gray-200 mb-6">
-                    <button type="button" onclick="switchAuthTab('login')" id="tab-login-btn" class="flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all">Masuk</button>
-                    <button type="button" onclick="switchAuthTab('register')" id="tab-register-btn" class="flex-1 pb-3 font-medium text-gray-400 text-sm transition-all">Daftar Baru</button>
+            <div class="bg-white/95 text-gray-900 p-6 rounded-3xl shadow-xl backdrop-blur-sm my-auto relative z-20">
+                <div class="flex border-b border-gray-200 mb-6 relative z-30">
+                    <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')" class="flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all cursor-pointer">Masuk</button>
+                    <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')" class="flex-1 pb-3 font-medium text-gray-400 text-sm transition-all cursor-pointer">Daftar Baru</button>
                 </div>
 
                 <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="auth-submit-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2 mt-2">
+                    <button type="submit" id="auth-submit-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer">
                         <span id="auth-btn-text">Masuk ke Aplikasi</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
@@ -131,10 +131,10 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="triggerPrint()" class="p-2 text-gray-600 hover:text-brand-600 hover:bg-gray-100 rounded-xl transition-all" title="Cetak / Export">
+                    <button onclick="triggerPrint()" class="p-2 text-gray-600 hover:text-brand-600 hover:bg-gray-100 rounded-xl transition-all cursor-pointer" title="Cetak / Export">
                         <i data-lucide="printer" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="handleLogout()" class="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all" title="Keluar">
+                    <button onclick="handleLogout()" class="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer" title="Keluar">
                         <i data-lucide="log-out" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -203,7 +203,7 @@
                     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
                         <div class="flex items-center justify-between mb-3">
                             <h4 class="font-bold text-sm text-gray-900">Aktivitas Terakhir</h4>
-                            <button onclick="switchTab('transaksi')" class="text-xs font-semibold text-brand-600 hover:underline">Lihat Semua</button>
+                            <button onclick="switchTab('transaksi')" class="text-xs font-semibold text-brand-600 hover:underline cursor-pointer">Lihat Semua</button>
                         </div>
                         <div id="dash-recent-list" class="space-y-3"></div>
                     </div>
@@ -213,10 +213,10 @@
                 <section id="tab-transaksi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm space-y-4">
                         <div class="flex bg-gray-100 p-1 rounded-xl">
-                            <button onclick="setTxType('pemasukan')" id="tx-type-inc" class="flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-brand-700 shadow-sm transition-all flex items-center justify-center gap-1">
+                            <button type="button" onclick="setTxType('pemasukan')" id="tx-type-inc" class="flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-brand-700 shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Pemasukan
                             </button>
-                            <button onclick="setTxType('pengeluaran')" id="tx-type-exp" class="flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1">
+                            <button type="button" onclick="setTxType('pengeluaran')" id="tx-type-exp" class="flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1 cursor-pointer">
                                 <i data-lucide="minus-circle" class="w-4 h-4"></i> Pengeluaran
                             </button>
                         </div>
@@ -243,7 +243,7 @@
                                 <input type="text" id="tx-desc" placeholder="Contoh: Gaji / Beli beras" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
                             </div>
 
-                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm">
+                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm cursor-pointer">
                                 <i data-lucide="check" class="w-4 h-4"></i> Simpan Transaksi
                             </button>
                         </form>
@@ -265,7 +265,7 @@
                             <h3 class="font-bold text-base text-gray-900">Rencana Menabung</h3>
                             <p class="text-xs text-gray-500">Wujudkan impian keluarga terencana</p>
                         </div>
-                        <button onclick="openSavingsModal()" class="bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all">
+                        <button onclick="openSavingsModal()" class="bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all cursor-pointer">
                             <i data-lucide="plus" class="w-4 h-4"></i> Tambah Rencana
                         </button>
                     </div>
@@ -297,7 +297,7 @@
                             </div>
                         </div>
 
-                        <button onclick="generateAITranslation()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs">
+                        <button onclick="generateAITranslation()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
                             <i data-lucide="sparkles" class="w-4 h-4 text-yellow-300"></i> Terjemahkan Arus Kas (Gaya P2K2)
                         </button>
                     </div>
@@ -313,7 +313,7 @@
                     <div id="printable-area" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
                         <div class="flex items-center justify-between border-b border-gray-100 pb-2">
                             <h4 class="font-bold text-sm text-gray-900">Laporan Transaksi Lengkap</h4>
-                            <button onclick="triggerPrint()" class="text-xs text-brand-600 font-semibold hover:underline flex items-center gap-1">
+                            <button onclick="triggerPrint()" class="text-xs text-brand-600 font-semibold hover:underline flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="printer" class="w-3.5 h-3.5"></i> Cetak PDF
                             </button>
                         </div>
@@ -376,7 +376,7 @@
                                 <span>Atas Nama</span>
                                 <span class="text-white font-semibold">Encep Yuyus</span>
                             </div>
-                            <button onclick="copyDonationAccount()" class="w-full mt-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg transition-all flex items-center justify-center gap-1.5">
+                            <button onclick="copyDonationAccount()" class="w-full mt-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Rekening Donasi
                             </button>
                         </div>
@@ -387,23 +387,23 @@
 
             <!-- BOTTOM NAVIGATION BAR -->
             <nav class="bg-white border-t border-gray-200 px-2 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
-                <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-brand-600 transition-all flex-1 py-1">
+                <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-brand-600 transition-all flex-1 py-1 cursor-pointer">
                     <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                     <span class="text-[10px] font-semibold">Dashboard</span>
                 </button>
-                <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1">
+                <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 cursor-pointer">
                     <i data-lucide="receipt" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium">Transaksi</span>
                 </button>
-                <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1">
+                <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 cursor-pointer">
                     <i data-lucide="piggy-bank" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium">Menabung</span>
                 </button>
-                <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1">
+                <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 cursor-pointer">
                     <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium">Laporan</span>
                 </button>
-                <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1">
+                <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 cursor-pointer">
                     <i data-lucide="info" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium">Informasi</span>
                 </button>
@@ -417,7 +417,7 @@
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
             <div class="flex items-center justify-between border-b border-gray-100 pb-3">
                 <h3 class="font-bold text-base text-gray-900">Tambah Rencana Menabung</h3>
-                <button onclick="closeSavingsModal()" class="p-1 text-gray-400 hover:text-gray-600 rounded-lg">
+                <button onclick="closeSavingsModal()" class="p-1 text-gray-400 hover:text-gray-600 rounded-lg cursor-pointer">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -449,8 +449,8 @@
                 </div>
 
                 <div class="flex gap-2 pt-2">
-                    <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm transition-all">Batal</button>
-                    <button type="submit" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl text-sm shadow-md transition-all">Simpan Rencana</button>
+                    <button type="button" onclick="closeSavingsModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm transition-all cursor-pointer">Batal</button>
+                    <button type="submit" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl text-sm shadow-md transition-all cursor-pointer">Simpan Rencana</button>
                 </div>
             </form>
         </div>
@@ -464,7 +464,7 @@
             </div>
             <h3 id="modal-title" class="font-bold text-base text-gray-900">Informasi</h3>
             <p id="modal-message" class="text-xs text-gray-600 leading-relaxed"></p>
-            <button onclick="closeCustomModal()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-md transition-all">Mengerti</button>
+            <button onclick="closeCustomModal()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-md transition-all cursor-pointer">Mengerti</button>
         </div>
     </div>
 
@@ -566,12 +566,12 @@
             const submitBtnText = document.getElementById('auth-btn-text');
 
             if (mode === 'login') {
-                loginBtn.className = "flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all";
-                registerBtn.className = "flex-1 pb-3 font-medium text-gray-400 text-sm transition-all";
+                loginBtn.className = "flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all cursor-pointer";
+                registerBtn.className = "flex-1 pb-3 font-medium text-gray-400 text-sm transition-all cursor-pointer";
                 submitBtnText.innerText = "Masuk ke Aplikasi";
             } else {
-                registerBtn.className = "flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all";
-                loginBtn.className = "flex-1 pb-3 font-medium text-gray-400 text-sm transition-all";
+                registerBtn.className = "flex-1 pb-3 font-semibold text-brand-600 border-b-2 border-brand-600 text-sm transition-all cursor-pointer";
+                loginBtn.className = "flex-1 pb-3 font-medium text-gray-400 text-sm transition-all cursor-pointer";
                 submitBtnText.innerText = "Daftar & Masuk";
             }
         }
@@ -619,10 +619,10 @@
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (tab === tabName) {
                     section.classList.remove('hidden');
-                    navBtn.className = "flex flex-col items-center gap-1 text-brand-600 transition-all flex-1 py-1 font-semibold";
+                    navBtn.className = "flex flex-col items-center gap-1 text-brand-600 transition-all flex-1 py-1 font-semibold cursor-pointer";
                 } else {
                     section.classList.add('hidden');
-                    navBtn.className = "flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 font-medium";
+                    navBtn.className = "flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-all flex-1 py-1 font-medium cursor-pointer";
                 }
             });
             document.getElementById('main-content-scroll').scrollTop = 0;
@@ -673,15 +673,15 @@
 
             catSelect.innerHTML = '';
             if (type === 'pemasukan') {
-                incBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-brand-700 shadow-sm transition-all flex items-center justify-center gap-1";
-                expBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1";
+                incBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-brand-700 shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer";
+                expBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 catLabel.innerText = "Sumber Pemasukan";
                 INCOME_CATEGORIES.forEach(cat => {
                     catSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
                 });
             } else {
-                expBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-red-700 shadow-sm transition-all flex items-center justify-center gap-1";
-                incBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1";
+                expBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-red-700 shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer";
+                incBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 transition-all flex items-center justify-center gap-1 cursor-pointer";
                 catLabel.innerText = "Jenis Pengeluaran";
                 EXPENSE_CATEGORIES.forEach(cat => {
                     catSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
@@ -751,7 +751,7 @@
                         </div>
                         <div>
                             <h5 class="font-bold text-xs text-gray-900">${tx.category}</h5>
-                            <p class="text-[10px] text-gray-400">${tx.desc} • ${tx.date}</p>
+                            <p class="text-[10px] text-gray-400">${tx.desc} •${tx.date}</p>
                         </div>
                     </div>
                     <span class="font-bold text-xs ${tx.type === 'pemasukan' ? 'text-emerald-600' : tx.type === 'pengeluaran' ? 'text-red-600' : 'text-purple-600'}">
@@ -786,7 +786,7 @@
                         <span class="font-bold text-xs ${tx.type === 'pemasukan' ? 'text-emerald-600' : tx.type === 'pengeluaran' ? 'text-red-600' : 'text-purple-600'}">
                             ${tx.type === 'pemasukan' ? '+' : '-'}${formatRupiah(tx.amount)}
                         </span>
-                        <button onclick="cancelTransaction('${tx.id}')" class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all" title="Batalkan">
+                        <button onclick="cancelTransaction('${tx.id}')" class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer" title="Batalkan">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
@@ -891,7 +891,7 @@
                                 <h4 class="font-bold text-sm text-gray-900">${sav.title}</h4>
                                 <p class="text-[10px] text-gray-500">Target Waktu: ${sav.months} Bulan (${sav.frequency})</p>
                             </div>
-                            <button onclick="cancelSavings('${sav.id}')" class="text-gray-400 hover:text-red-600 p-1 rounded-lg" title="Batalkan Rencana">
+                            <button onclick="cancelSavings('${sav.id}')" class="text-gray-400 hover:text-red-600 p-1 rounded-lg cursor-pointer" title="Batalkan Rencana">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -911,7 +911,7 @@
                                 <span class="text-[10px] text-gray-400 uppercase block font-semibold">Cicilan ${sav.frequency}</span>
                                 <span class="text-xs font-bold text-gray-900">${formatRupiah(sav.installment)}</span>
                             </div>
-                            <button onclick="depositSavings('${sav.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-1.5">
+                            <button onclick="depositSavings('${sav.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
                                 <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Setor Cicilan
                             </button>
                         </div>
@@ -947,75 +947,4 @@
             container.innerHTML = filtered.map(tx => `
                 <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-100 text-xs">
                     <div>
-                        <h5 class="font-bold text-gray-900">${tx.category}</h5>
-                        <p class="text-[10px] text-gray-500">${tx.desc} • ${tx.date}</p>
-                    </div>
-                    <span class="font-bold ${tx.type === 'pemasukan' ? 'text-emerald-600' : tx.type === 'pengeluaran' ? 'text-red-600' : 'text-purple-600'}">
-                        ${tx.type === 'pemasukan' ? '+' : '-'}${formatRupiah(tx.amount)}
-                    </span>
-                </div>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        function generateAITranslation() {
-            const box = document.getElementById('ai-translation-box');
-            const content = document.getElementById('ai-translation-content');
-            box.classList.remove('hidden');
-
-            let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
-            let totalExpense = appState.transactions.filter(t => t.type === 'pengeluaran').reduce((acc, t) => acc + t.amount, 0);
-            let totalSaved = appState.transactions.filter(t => t.type === 'tabungan').reduce((acc, t) => acc + t.amount, 0);
-            let saldoKas = totalIncome - totalExpense - totalSaved;
-
-            let evaluation = "";
-            if (totalIncome === 0 && totalExpense === 0) {
-                evaluation = "Belum ada catatan transaksi yang dimasukkan. Silakan catat pemasukan dan pengeluaran keluarga Anda terlebih dahulu agar sistem dapat memberikan evaluasi P2K2.";
-            } else {
-                let ratio = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
-                evaluation = `Berdasarkan arus kas keluarga Anda, total pemasukan tercatat ${formatRupiah(totalIncome)} dengan pengeluaran sebesar ${formatRupiah(totalExpense)}. Sisa saldo kas saat ini adalah ${formatRupiah(saldoKas)}. `;
-                if (ratio > 80) {
-                    evaluation += `Perhatian: Rasio pengeluaran Anda mencapai ${ratio.toFixed(1)}% dari pemasukan. Sesuai prinsip P2K2 Modul Ekonomi, disarankan untuk lebih berhemat dan memprioritaskan kebutuhan pokok dibandingkan keinginan agar tidak terjadi defisit anggaran.`;
-                } else {
-                    evaluation += `Keuangan keluarga Anda terpantau cukup sehat dengan rasio pengeluaran ${ratio.toFixed(1)}%. Pertahankan kedisiplinan mengelola anggaran dan tingkatkan alokasi tabungan rutin untuk masa depan!`;
-                }
-            }
-
-            content.innerText = evaluation;
-        }
-
-        function triggerPrint() {
-            window.print();
-        }
-
-        function copyDonationAccount() {
-            const textToCopy = "7211585298";
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    showToast("Nomor rekening BSI berhasil disalin!");
-                }).catch(() => {
-                    fallbackCopyText(textToCopy);
-                });
-            } else {
-                fallbackCopyText(textToCopy);
-            }
-        }
-
-        function fallbackCopyText(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast("Nomor rekening BSI berhasil disalin!");
-            } catch (err) {
-                showToast("Gagal menyalin rekening.", "error");
-            }
-            document.body.removeChild(textArea);
-        }
-    </script>
-</body>
-</html>
+                        <h5 class="font
