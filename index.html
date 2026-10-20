@@ -37,7 +37,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #022c22;
         }
-        /* Sentuhan Batik Halus Klasik */
         .batik-pattern {
             background-color: #064e3b;
             background-image: radial-gradient(#047857 0.75px, transparent 0.75px), radial-gradient(#047857 0.75px, #064e3b 0.75px);
@@ -86,8 +85,8 @@
 
             <div class="bg-white text-gray-900 p-6 rounded-3xl shadow-2xl my-auto relative z-20 border border-emerald-100">
                 <div class="grid grid-cols-2 border-b border-gray-200 mb-6">
-                    <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')" class="pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center">Masuk</button>
-                    <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')" class="pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center">Daftar Baru</button>
+                    <button type="button" id="tab-login-btn" class="pb-3 font-bold text-emerald-700 border-b-2 border-emerald-600 text-sm transition-all cursor-pointer text-center">Masuk</button>
+                    <button type="button" id="tab-register-btn" class="pb-3 font-bold text-gray-400 border-b-2 border-transparent text-sm transition-all cursor-pointer text-center">Daftar Baru</button>
                 </div>
 
                 <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
@@ -280,7 +279,91 @@
                     <div id="savings-list" class="space-y-4"></div>
                 </section>
 
-                <!-- 4. LAPORAN TAB (Dengan Filter Berdasarkan Tanggal, Hari, Minggu, Bulan) -->
+                <!-- 4. MENU ZIS (Zakat, Infaq, Sedekah Bulanan) -->
+                <section id="tab-zis" class="space-y-4 tab-section hidden">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-800 shrink-0 border border-emerald-300">
+                                <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-base text-gray-900">Pengelolaan ZIS Keluarga</h3>
+                                <p class="text-xs text-gray-600">Zakat, Infaq, & Sedekah Bulanan</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-3 space-y-4 text-xs">
+                            <!-- 1. ZAKAT PENGHASILAN BAZNAS -->
+                            <div class="bg-emerald-50/60 border border-emerald-200 p-4 rounded-2xl space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-700"></i>
+                                        <h4 class="font-bold text-emerald-900 text-sm">Zakat Penghasilan (Baznas)</h4>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="zakat-active" onchange="updateZISConfig()" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                    </label>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed text-[11px]">
+                                    Perhitungan otomatis realtime mengikuti aturan Baznas (Tarif 2.5% dari total pemasukan bulanan jika mencapai nisab setara 85 gram emas / ± Rp 6.875.000 per bulan). Berdiri sendiri dari pemasukan, tidak dipengaruhi pengeluaran.
+                                </p>
+                                <div id="zakat-status-box" class="bg-white p-3 rounded-xl border border-emerald-200 flex justify-between items-center font-bold">
+                                    <span class="text-gray-700">Estimasi Zakat Bulan Ini:</span>
+                                    <span id="zakat-calculated-amount" class="text-emerald-700">Rp 0 (Belum Mencapai Nishob)</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. INFAQ BULANAN -->
+                            <div class="bg-blue-50/60 border border-blue-200 p-4 rounded-2xl space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="gift" class="w-5 h-5 text-blue-700"></i>
+                                        <h4 class="font-bold text-blue-900 text-sm">Infaq Bulanan</h4>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="infaq-active" onchange="updateZISConfig()" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 items-center">
+                                    <span class="text-gray-700 font-medium">Persentase dari Pemasukan:</span>
+                                    <div class="flex items-center gap-1">
+                                        <input type="number" id="infaq-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-blue-300 rounded-xl text-center font-bold text-blue-900">
+                                        <span class="font-bold text-blue-900">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. SEDEKAH BULANAN -->
+                            <div class="bg-purple-50/60 border border-purple-200 p-4 rounded-2xl space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="sparkles" class="w-5 h-5 text-purple-700"></i>
+                                        <h4 class="font-bold text-purple-900 text-sm">Sedekah Bulanan</h4>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="sedekah-active" onchange="updateZISConfig()" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                    </label>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 items-center">
+                                    <span class="text-gray-700 font-medium">Persentase dari Pemasukan:</span>
+                                    <div class="flex items-center gap-1">
+                                        <input type="number" id="sedekah-percent" min="0.1" max="100" step="0.1" value="2.5" onchange="updateZISConfig()" class="w-full px-3 py-1.5 bg-white border border-purple-300 rounded-xl text-center font-bold text-purple-900">
+                                        <span class="font-bold text-purple-900">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="executeZISCalculation()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
+                            <i data-lucide="calculator" class="w-4 h-4"></i> Hitung & Catat Otomatis ke Transaksi Bulanan
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 5. LAPORAN TAB -->
                 <section id="tab-laporan" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                         <h3 class="font-bold text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
@@ -293,6 +376,7 @@
                                     <option value="pemasukan">Pemasukan</option>
                                     <option value="pengeluaran">Pengeluaran</option>
                                     <option value="tabungan">Setoran Tabungan</option>
+                                    <option value="zis">ZIS (Zakat/Infaq/Sedekah)</option>
                                 </select>
                             </div>
                             <div>
@@ -305,8 +389,8 @@
                             </div>
                         </div>
 
-                        <!-- Filter Waktu (Hari, Minggu, Bulan, Tanggal) -->
-                        <div class="grid grid-cols-2 gap-2 pt-1">
+                        <!-- Filter Waktu Lengkap -->
+                        <div class="space-y-2 pt-1">
                             <div>
                                 <label class="block text-[11px] font-bold uppercase text-gray-700 mb-1">Periode Waktu</label>
                                 <select id="report-filter-time" onchange="toggleDateInput()" class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
@@ -314,7 +398,7 @@
                                     <option value="today">Hari Ini</option>
                                     <option value="week">Minggu Ini</option>
                                     <option value="month">Bulan Ini</option>
-                                    <option value="custom">Pilih Tanggal</option>
+                                    <option value="custom">Pilih Tanggal Tertentu</option>
                                 </select>
                             </div>
                             <div id="custom-date-wrapper" class="hidden">
@@ -347,7 +431,7 @@
                     </div>
                 </section>
 
-                <!-- 5. INFORMASI TAB -->
+                <!-- 6. INFORMASI TAB -->
                 <section id="tab-informasi" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
                         <div class="flex items-center gap-3">
@@ -411,27 +495,31 @@
 
             </main>
 
-            <!-- BOTTOM NAVIGATION BAR -->
-            <nav class="bg-white border-t border-gray-200 px-2 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
+            <!-- BOTTOM NAVIGATION BAR (Ditambah Menu ZIS) -->
+            <nav class="bg-white border-t border-gray-200 px-1 py-2 flex items-center justify-around shrink-0 z-10 shadow-lg">
                 <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold">
-                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                    <span class="text-[10px]">Dashboard</span>
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Dashboard</span>
                 </button>
                 <button onclick="switchTab('transaksi')" id="nav-btn-transaksi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="receipt" class="w-5 h-5"></i>
-                    <span class="text-[10px]">Transaksi</span>
+                    <i data-lucide="receipt" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Transaksi</span>
                 </button>
                 <button onclick="switchTab('menabung')" id="nav-btn-menabung" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="piggy-bank" class="w-5 h-5"></i>
-                    <span class="text-[10px]">Menabung</span>
+                    <i data-lucide="piggy-bank" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Menabung</span>
+                </button>
+                <button onclick="switchTab('zis')" id="nav-btn-zis" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
+                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    <span class="text-[9px]">ZIS</span>
                 </button>
                 <button onclick="switchTab('laporan')" id="nav-btn-laporan" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-                    <span class="text-[10px]">Laporan</span>
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Laporan</span>
                 </button>
                 <button onclick="switchTab('informasi')" id="nav-btn-informasi" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium">
-                    <i data-lucide="info" class="w-5 h-5"></i>
-                    <span class="text-[10px]">Informasi</span>
+                    <i data-lucide="info" class="w-4 h-4"></i>
+                    <span class="text-[9px]">Informasi</span>
                 </button>
             </nav>
 
@@ -502,7 +590,14 @@
             activeTab: 'dashboard',
             txType: 'pemasukan',
             transactions: [],
-            savings: []
+            savings: [],
+            zisConfig: {
+                zakatActive: false,
+                infaqActive: false,
+                infaqPercent: 2.5,
+                sedekahActive: false,
+                sedekahPercent: 2.5
+            }
         };
 
         const INCOME_CATEGORIES = [
@@ -573,7 +668,8 @@
             const key = `keuangan_keluarga_${appState.currentUser}`;
             localStorage.setItem(key, JSON.stringify({
                 transactions: appState.transactions,
-                savings: appState.savings
+                savings: appState.savings,
+                zisConfig: appState.zisConfig
             }));
         }
 
@@ -581,13 +677,19 @@
             const lastUser = localStorage.getItem('keuangan_keluarga_active_user');
             if (lastUser) {
                 appState.currentUser = lastUser;
-                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[]}');
+                const data = JSON.parse(localStorage.getItem(`keuangan_keluarga_${lastUser}`) || '{"transactions":[], "savings":[], "zisConfig":{}}');
                 appState.transactions = data.transactions || [];
                 appState.savings = data.savings || [];
+                appState.zisConfig = Object.assign({
+                    zakatActive: false,
+                    infaqActive: false,
+                    infaqPercent: 2.5,
+                    sedekahActive: false,
+                    sedekahPercent: 2.5
+                }, data.zisConfig || {});
             }
         }
 
-        // PERBAIKAN TOTAL: Event listener langsung dipasang via JS pada tombol Masuk dan Daftar Baru agar tidak ada kendala klik
         function switchAuthTab(mode) {
             appState.authMode = mode;
             const loginBtn = document.getElementById('tab-login-btn');
@@ -650,18 +752,19 @@
 
         function switchTab(tabName) {
             appState.activeTab = tabName;
-            ['dashboard', 'transaksi', 'menabung', 'laporan', 'informasi'].forEach(tab => {
+            ['dashboard', 'transaksi', 'menabung', 'zis', 'laporan', 'informasi'].forEach(tab => {
                 const section = document.getElementById(`tab-${tab}`);
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (tab === tabName) {
-                    section.classList.remove('hidden');
-                    navBtn.className = "flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold";
+                    if (section) section.classList.remove('hidden');
+                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-emerald-700 transition-all flex-1 py-1 cursor-pointer font-bold";
                 } else {
-                    section.classList.add('hidden');
-                    navBtn.className = "flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium";
+                    if (section) section.classList.add('hidden');
+                    if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all flex-1 py-1 cursor-pointer font-medium";
                 }
             });
             document.getElementById('main-content-scroll').scrollTop = 0;
+            if (tabName === 'zis') syncZISUI();
             if (tabName === 'laporan') renderReports();
         }
 
@@ -677,6 +780,7 @@
                 if (tx.type === 'pemasukan') totalIncome += tx.amount;
                 else if (tx.type === 'pengeluaran') totalExpense += tx.amount;
                 else if (tx.type === 'tabungan') totalSavingsDeposited += tx.amount;
+                // ZIS dicatat sebagai jenis khusus atau pengeluaran sosial, tidak mengurangi kas perhitungan operasional rumah tangga secara keliru jika dicatat mandiri
             });
 
             const saldoKas = totalIncome - totalExpense - totalSavingsDeposited;
@@ -693,6 +797,7 @@
             renderRecentTransactions();
             renderTransactionHistory();
             renderSavingsPlans();
+            syncZISUI();
             lucide.createIcons();
         }
 
@@ -771,6 +876,111 @@
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
 
+        // --- ZIS (Zakat, Infaq, Sedekah) LOGIC ---
+        function syncZISUI() {
+            const zCheckbox = document.getElementById('zakat-active');
+            const iCheckbox = document.getElementById('infaq-active');
+            const iPercent = document.getElementById('infaq-percent');
+            const sCheckbox = document.getElementById('sedekah-active');
+            const sPercent = document.getElementById('sedekah-percent');
+
+            if (zCheckbox) zCheckbox.checked = appState.zisConfig.zakatActive;
+            if (iCheckbox) iCheckbox.checked = appState.zisConfig.infaqActive;
+            if (iPercent) iPercent.value = appState.zisConfig.infaqPercent;
+            if (sCheckbox) sCheckbox.checked = appState.zisConfig.sedekahActive;
+            if (sPercent) sPercent.value = appState.zisConfig.sedekahPercent;
+
+            calculateRealtimeZakat();
+        }
+
+        function updateZISConfig() {
+            appState.zisConfig.zakatActive = document.getElementById('zakat-active').checked;
+            appState.zisConfig.infaqActive = document.getElementById('infaq-active').checked;
+            appState.zisConfig.infaqPercent = parseFloat(document.getElementById('infaq-percent').value) || 0;
+            appState.zisConfig.sedekahActive = document.getElementById('sedekah-active').checked;
+            appState.zisConfig.sedekahPercent = parseFloat(document.getElementById('sedekah-percent').value) || 0;
+
+            saveToStorage();
+            calculateRealtimeZakat();
+        }
+
+        function calculateRealtimeZakat() {
+            // Hitung total pemasukan bulanan saat ini (berdiri sendiri, tidak terpengaruh pengeluaran)
+            let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
+            
+            // Standar Nishob Zakat Penghasilan Baznas: Setara 85 gram emas per tahun (~Rp 82.500.000 / tahun atau Rp 6.875.000 / bulan)
+            const nishobBulanan = 6875000;
+            const zakatBox = document.getElementById('zakat-calculated-amount');
+
+            if (!zakatBox) return;
+
+            if (totalIncome >= nishobBulanan) {
+                let calculatedZakat = totalIncome * 0.025; // 2.5%
+                zakatBox.innerText = `${formatRupiah(calculatedZakat)} (Wajib Zakat)`;
+                zakatBox.className = "text-emerald-700 font-bold";
+            } else {
+                zakatBox.innerText = `Rp 0 (Pemasukan < Nishob Rp 6.875.000)`;
+                zakatBox.className = "text-gray-500 text-xs";
+            }
+        }
+
+        function executeZISCalculation() {
+            let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
+            const nishobBulanan = 6875000;
+            let recordCount = 0;
+            const today = new Date().toISOString().split('T')[0];
+
+            // 1. Zakat
+            if (appState.zisConfig.zakatActive && totalIncome >= nishobBulanan) {
+                let zakatAmount = totalIncome * 0.025;
+                appState.transactions.unshift({
+                    id: 'zis_zakat_' + Date.now(),
+                    type: 'zis',
+                    category: 'Zakat Penghasilan (Baznas)',
+                    amount: zakatAmount,
+                    date: today,
+                    desc: 'Kalkulasi otomatis 2.5% dari pemasukan'
+                });
+                recordCount++;
+            }
+
+            // 2. Infaq
+            if (appState.zisConfig.infaqActive && totalIncome > 0) {
+                let infaqAmount = totalIncome * (appState.zisConfig.infaqPercent / 100);
+                appState.transactions.unshift({
+                    id: 'zis_infaq_' + Date.now(),
+                    type: 'zis',
+                    category: 'Infaq Bulanan',
+                    amount: infaqAmount,
+                    date: today,
+                    desc: `Kalkulasi ${appState.zisConfig.infaqPercent}% dari pemasukan`
+                });
+                recordCount++;
+            }
+
+            // 3. Sedekah
+            if (appState.zisConfig.sedekahActive && totalIncome > 0) {
+                let sedekahAmount = totalIncome * (appState.zisConfig.sedekahPercent / 100);
+                appState.transactions.unshift({
+                    id: 'zis_sedekah_' + Date.now(),
+                    type: 'zis',
+                    category: 'Sedekah Bulanan',
+                    amount: sedekahAmount,
+                    date: today,
+                    desc: `Kalkulasi ${appState.zisConfig.sedekahPercent}% dari pemasukan`
+                });
+                recordCount++;
+            }
+
+            if (recordCount > 0) {
+                saveToStorage();
+                refreshAppUI();
+                showToast(`Berhasil mencatat ${recordCount} pos ZIS ke dalam riwayat!`);
+            } else {
+                showModal("Informasi ZIS", "Tidak ada ZIS yang dicatat. Pastikan menu aktif dan total pemasukan mencukupi ketentuan.", false);
+            }
+        }
+
         function renderRecentTransactions() {
             const container = document.getElementById('dash-recent-list');
             const recents = appState.transactions.slice(0, 3);
@@ -782,8 +992,8 @@
             container.innerHTML = recents.map(tx => `
                 <div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : 'bg-purple-100 text-purple-800'}">
-                            <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : 'piggy-bank'}" class="w-4 h-4"></i>
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-800' : 'bg-teal-100 text-teal-800'}">
+                            <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : tx.type === 'tabungan' ? 'piggy-bank' : 'heart-handshake'}" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <h5 class="font-bold text-xs text-gray-900">${tx.category}</h5>
@@ -809,8 +1019,8 @@
             container.innerHTML = appState.transactions.map(tx => `
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : 'bg-purple-100 text-purple-800'}">
-                            <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : 'piggy-bank'}" class="w-4 h-4"></i>
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${tx.type === 'pemasukan' ? 'bg-emerald-100 text-emerald-800' : tx.type === 'pengeluaran' ? 'bg-red-100 text-red-800' : tx.type === 'tabungan' ? 'bg-purple-100 text-purple-800' : 'bg-teal-100 text-teal-800'}">
+                            <i data-lucide="${tx.type === 'pemasukan' ? 'arrow-down-left' : tx.type === 'pengeluaran' ? 'arrow-up-right' : tx.type === 'tabungan' ? 'piggy-bank' : 'heart-handshake'}" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <h5 class="font-bold text-xs text-gray-900">${tx.category}</h5>
@@ -967,7 +1177,6 @@
             renderReports();
         }
 
-        // Fungsi Filter Arus Kas Berdasarkan Tanggal, Hari, Minggu, Bulan
         function renderReports() {
             const typeFilter = document.getElementById('report-filter-type').value;
             const sortFilter = document.getElementById('report-filter-sort').value;
@@ -977,26 +1186,26 @@
 
             let filtered = [...appState.transactions];
 
-            // Filter Jenis Transaksi
+            // Filter Jenis Transaksi (Termasuk ZIS)
             if (typeFilter !== 'all') {
                 if (typeFilter === 'tabungan') filtered = filtered.filter(t => t.type === 'tabungan');
+                else if (typeFilter === 'zis') filtered = filtered.filter(t => t.type === 'zis');
                 else filtered = filtered.filter(t => t.type === typeFilter);
             }
 
-            // Filter Waktu (Hari, Minggu, Bulan, Tanggal Tertentu)
+            // Filter Waktu (Hari Ini, Minggu Ini, Bulan Ini, Tanggal Tertentu)
             const now = new Date();
             const todayStr = now.toISOString().split('T')[0];
 
             if (timeFilter === 'today') {
                 filtered = filtered.filter(t => t.date === todayStr);
             } else if (timeFilter === 'week') {
-                // Rentang 7 hari terakhir / minggu berjalan
                 const startOfWeek = new Date(now);
                 startOfWeek.setDate(now.getDate() - now.getDay());
                 startOfWeek.setHours(0,0,0,0);
                 filtered = filtered.filter(t => new Date(t.date) >= startOfWeek);
             } else if (timeFilter === 'month') {
-                const currentMonth = now.toISOString().slice(0, 7); // YYYY-MM
+                const currentMonth = now.toISOString().slice(0, 7);
                 filtered = filtered.filter(t => t.date.startsWith(currentMonth));
             } else if (timeFilter === 'custom' && customDateVal) {
                 filtered = filtered.filter(t => t.date === customDateVal);
