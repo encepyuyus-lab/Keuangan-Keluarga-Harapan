@@ -279,7 +279,7 @@
                     <div id="savings-list" class="space-y-4"></div>
                 </section>
 
-                <!-- 4. MENU PINJAMAN -->
+                <!-- 4. MENU PINJAMAN (Dengan Tombol Bayar & Berpengaruh ke Saldo Kas) -->
                 <section id="tab-pinjaman" class="space-y-4 tab-section hidden">
                     <div class="flex bg-gray-200 p-1 rounded-xl">
                         <button type="button" onclick="setLoanTab('minjam')" id="loan-tab-minjam" class="flex-1 py-2 text-xs font-bold rounded-lg bg-white text-emerald-800 shadow transition-all flex items-center justify-center gap-1 cursor-pointer">
@@ -294,7 +294,7 @@
                         <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
                             <div>
                                 <h4 class="font-bold text-sm text-gray-900">Daftar Pinjaman Keluarga</h4>
-                                <p class="text-[11px] text-gray-500">Kelola pinjaman secara bijak & terarah</p>
+                                <p class="text-[11px] text-gray-500">Kelola pinjaman & bayar cicilan terarah</p>
                             </div>
                             <button onclick="openLoanModal('minjam')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="plus" class="w-4 h-4"></i> Tambah
@@ -307,7 +307,7 @@
                         <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
                             <div>
                                 <h4 class="font-bold text-sm text-gray-900">Daftar Piutang (Meminjamkan)</h4>
-                                <p class="text-[11px] text-gray-500">Catat bantuan / piutang ke orang lain</p>
+                                <p class="text-[11px] text-gray-500">Catat pinjaman & terima pelunasan</p>
                             </div>
                             <button onclick="openLoanModal('meminjamkan')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
                                 <i data-lucide="plus" class="w-4 h-4"></i> Tambah
@@ -417,7 +417,7 @@
                     </div>
                 </section>
 
-                <!-- 6. LAPORAN TAB (Dengan Terjemahan Arus Kas Menyeluruh ke Seluruh Modul) -->
+                <!-- 6. LAPORAN TAB -->
                 <section id="tab-laporan" class="space-y-4 tab-section hidden">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                         <h3 class="font-bold text-sm text-gray-900">Filter & Evaluasi Arus Kas</h3>
@@ -656,18 +656,24 @@
                         <input type="number" id="loan-amount" min="1000" required placeholder="500000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Lama Waktu</label>
-                        <input type="text" id="loan-duration" required placeholder="Contoh: 6 Bulan" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Cicilan / Angsuran (Rp)</label>
+                        <input type="number" id="loan-installment" min="100" required placeholder="50000" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Target Periode Membayar</label>
-                    <select id="loan-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
-                        <option value="Bulanan">Bulanan</option>
-                        <option value="Mingguan">Mingguan</option>
-                        <option value="Harian">Harian</option>
-                    </select>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Lama Waktu</label>
+                        <input type="text" id="loan-duration" required placeholder="Contoh: 10 Kali" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Frekuensi</label>
+                        <select id="loan-frequency" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600 text-gray-900">
+                            <option value="Bulanan">Bulanan</option>
+                            <option value="Mingguan">Mingguan</option>
+                            <option value="Harian">Harian</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div>
@@ -1005,7 +1011,7 @@
             showToast("Transaksi dibatalkan/dihapus.", "success");
         }
 
-        // --- LOAN LOGIC ---
+        // --- LOAN LOGIC (PENGARUH KE SALDO KAS & TOMBOL PEMBAYARAN) ---
         function setLoanTab(tab) {
             appState.loanTab = tab;
             const btnMinjam = document.getElementById('loan-tab-minjam');
@@ -1054,9 +1060,12 @@
             const entity = document.getElementById('loan-entity').value.trim();
             const purpose = document.getElementById('loan-purpose').value.trim();
             const amount = parseFloat(document.getElementById('loan-amount').value);
+            const installment = parseFloat(document.getElementById('loan-installment').value);
             const duration = document.getElementById('loan-duration').value.trim();
             const frequency = document.getElementById('loan-frequency').value;
             const charity = document.getElementById('loan-charity').value.trim() || 'Tidak ada';
+
+            const today = new Date().toISOString().split('T')[0];
 
             const newLoan = {
                 id: 'loan_' + Date.now(),
@@ -1064,17 +1073,98 @@
                 entity,
                 purpose,
                 amount,
+                sisaAmount: amount,
+                installment,
                 duration,
                 frequency,
                 charity,
-                date: new Date().toISOString().split('T')[0]
+                date: today
             };
+
+            // Berpengaruh ke Saldo Kas
+            if (mode === 'minjam') {
+                // Meminjam uang -> Uang masuk ke Kas (Pemasukan)
+                appState.transactions.unshift({
+                    id: 'tx_loan_in_' + Date.now(),
+                    type: 'pemasukan',
+                    category: `Pinjaman Masuk (${entity})`,
+                    amount: amount,
+                    date: today,
+                    desc: purpose
+                });
+            } else {
+                // Meminjamkan uang -> Uang keluar dari Kas (Pengeluaran)
+                let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
+                let totalExpense = appState.transactions.filter(t => t.type === 'pengeluaran').reduce((acc, t) => acc + t.amount, 0);
+                let totalSaved = appState.transactions.filter(t => t.type === 'tabungan').reduce((acc, t) => acc + t.amount, 0);
+                let currentKas = totalIncome - totalExpense - totalSaved;
+
+                if (amount > currentKas) {
+                    showModal("Saldo Kas Tidak Cukup", "Saldo kas saat ini tidak mencukupi untuk meminjamkan nominal tersebut.", false);
+                    return;
+                }
+
+                appState.transactions.unshift({
+                    id: 'tx_loan_out_' + Date.now(),
+                    type: 'pengeluaran',
+                    category: `Piutang Diberikan (${entity})`,
+                    amount: amount,
+                    date: today,
+                    desc: purpose
+                });
+            }
 
             appState.loans.unshift(newLoan);
             saveToStorage();
             refreshAppUI();
             closeLoanModal();
-            showToast("Rencana pinjaman berhasil dicatat!");
+            showToast("Rencana pinjaman berhasil dicatat & disinkronkan ke Saldo Kas!");
+        }
+
+        // Fungsi membayar cicilan pinjaman (minjam) atau menerima cicilan piutang (meminjamkan)
+        function payLoanInstallment(id) {
+            const loan = appState.loans.find(l => l.id === id);
+            if (!loan || loan.sisaAmount <= 0) return;
+
+            let payAmount = Math.min(loan.installment, loan.sisaAmount);
+            const today = new Date().toISOString().split('T')[0];
+
+            if (loan.mode === 'minjam') {
+                // Bayar Cicilan Hutang -> Mengurangi Saldo Kas (Pengeluaran)
+                let totalIncome = appState.transactions.filter(t => t.type === 'pemasukan').reduce((acc, t) => acc + t.amount, 0);
+                let totalExpense = appState.transactions.filter(t => t.type === 'pengeluaran').reduce((acc, t) => acc + t.amount, 0);
+                let totalSaved = appState.transactions.filter(t => t.type === 'tabungan').reduce((acc, t) => acc + t.amount, 0);
+                let currentKas = totalIncome - totalExpense - totalSaved;
+
+                if (payAmount > currentKas) {
+                    showModal("Saldo Kas Tidak Cukup", "Saldo kas saat ini tidak mencukupi untuk membayar cicilan pinjaman ini.", false);
+                    return;
+                }
+
+                appState.transactions.unshift({
+                    id: 'tx_pay_loan_' + Date.now(),
+                    type: 'pengeluaran',
+                    category: `Bayar Cicilan (${loan.entity})`,
+                    amount: payAmount,
+                    date: today,
+                    desc: `Cicilan ${loan.purpose}`
+                });
+            } else {
+                // Terima Pelunasan/Cicilan Piutang -> Menambah Saldo Kas (Pemasukan)
+                appState.transactions.unshift({
+                    id: 'tx_receive_loan_' + Date.now(),
+                    type: 'pemasukan',
+                    category: `Terima Cicilan Piutang (${loan.entity})`,
+                    amount: payAmount,
+                    date: today,
+                    desc: `Cicilan dari ${loan.purpose}`
+                });
+            }
+
+            loan.sisaAmount -= payAmount;
+            saveToStorage();
+            refreshAppUI();
+            showToast(`Berhasil membayar cicilan sebesar ${formatRupiah(payAmount)}!`);
         }
 
         function deleteLoan(id) {
@@ -1094,50 +1184,90 @@
             if (minjams.length === 0) {
                 minjamContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjam.</div>`;
             } else {
-                minjamContainer.innerHTML = minjams.map(l => `
-                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-2 text-xs">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-[10px]">Meminjam Ke: ${l.entity}</span>
-                                <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                minjamContainer.innerHTML = minjams.map(l => {
+                    let progress = Math.min(100, Math.round(((l.amount - l.sisaAmount) / l.amount) * 100));
+                    return `
+                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3 text-xs">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-[10px]">Meminjam Ke: ${l.entity}</span>
+                                    <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                                </div>
+                                <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
-                            <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            
+                            <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                                <div>Total Pinjaman: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
+                                <div>Sisa Hutang: <strong class="text-red-600">${formatRupiah(l.sisaAmount)}</strong></div>
+                                <div>Besar Cicilan: <strong class="text-gray-900">${formatRupiah(l.installment)} (${l.frequency})</strong></div>
+                                <div>Sedekah/Keringanan: <strong class="text-emerald-700">${l.charity}</strong></div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-[11px] font-semibold text-gray-500">
+                                    <span>Progress Pelunasan (${progress}%)</span>
+                                    <span>${l.sisaAmount <= 0 ? 'LUNAS' : 'Belum Lunas'}</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-600 h-full rounded-full transition-all" style="width: ${progress}%"></div>
+                                </div>
+                            </div>
+
+                            ${l.sisaAmount > 0 ? `
+                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs transition-all cursor-pointer shadow">
+                                    Bayar Cicilan (${formatRupiah(l.installment)})
+                                </button>
+                            ` : `<div class="text-center font-bold text-emerald-700 py-1 bg-emerald-50 rounded-xl">Pinjaman Telah Lunas 🎉</div>`}
                         </div>
-                        <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
-                            <div>Nominal: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
-                            <div>Waktu: <strong class="text-gray-900">${l.duration}</strong></div>
-                            <div>Cicilan: <strong class="text-gray-900">${l.frequency}</strong></div>
-                            <div>Sedekah/Keringanan: <strong class="text-emerald-700">${l.charity}</strong></div>
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             if (meminjamkans.length === 0) {
                 meminjamkanContainer.innerHTML = `<div class="bg-white p-5 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">Belum ada catatan cermat meminjamkan.</div>`;
             } else {
-                meminjamkanContainer.innerHTML = meminjamkans.map(l => `
-                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-2 text-xs">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">Peminjam: ${l.entity}</span>
-                                <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                meminjamkans.innerHTML = meminjamkans.map(l => {
+                    let progress = Math.min(100, Math.round(((l.amount - l.sisaAmount) / l.amount) * 100));
+                    return `
+                        <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3 text-xs">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">Peminjam: ${l.entity}</span>
+                                    <h4 class="font-bold text-gray-900 mt-1">${l.purpose}</h4>
+                                </div>
+                                <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
-                            <button onclick="deleteLoan('${l.id}')" class="text-gray-400 hover:text-red-600 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+
+                            <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
+                                <div>Total Piutang: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
+                                <div>Belum Dibayar: <strong class="text-amber-600">${formatRupiah(l.sisaAmount)}</strong></div>
+                                <div>Cicilan Masuk: <strong class="text-gray-900">${formatRupiah(l.installment)} (${l.frequency})</strong></div>
+                                <div>Sedekah Pinjaman: <strong class="text-emerald-700">${l.charity}</strong></div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-[11px] font-semibold text-gray-500">
+                                    <span>Progress Pengembalian (${progress}%)</span>
+                                    <span>${l.sisaAmount <= 0 ? 'LUNAS' : 'Belum Lunas'}</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-blue-600 h-full rounded-full transition-all" style="width: ${progress}%"></div>
+                                </div>
+                            </div>
+
+                            ${l.sisaAmount > 0 ? `
+                                <button onclick="payLoanInstallment('${l.id}')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs transition-all cursor-pointer shadow">
+                                    Terima Cicilan (${formatRupiah(l.installment)})
+                                </button>
+                            ` : `<div class="text-center font-bold text-blue-700 py-1 bg-blue-50 rounded-xl">Piutang Telah Lunas 🎉</div>`}
                         </div>
-                        <div class="grid grid-cols-2 gap-2 text-gray-600 bg-gray-50 p-2.5 rounded-xl font-medium">
-                            <div>Nominal: <strong class="text-gray-900">${formatRupiah(l.amount)}</strong></div>
-                            <div>Waktu: <strong class="text-gray-900">${l.duration}</strong></div>
-                            <div>Target: <strong class="text-gray-900">${l.frequency}</strong></div>
-                            <div>Sedekah Pinjaman: <strong class="text-emerald-700">${l.charity}</strong></div>
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
             lucide.createIcons();
         }
 
-        // --- ZIS LOGIC (SK BAZNAS No. 15 Tahun 2026: Rp 7.640.144) ---
+        // --- ZIS LOGIC ---
         function syncZISUI() {
             const zCheckbox = document.getElementById('zakat-active');
             const iCheckbox = document.getElementById('infaq-active');
@@ -1167,10 +1297,9 @@
 
         function calculateZISUnpaid() {
             const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
-            const nishobBulanan = 7640144; // SK BAZNAS No. 15 Tahun 2026
+            const nishobBulanan = 7640144;
             let totalIncomeAll = incomes.reduce((acc, t) => acc + t.amount, 0);
 
-            // Zakat
             let zakatUnpaid = 0;
             const zBox = document.getElementById('zakat-unpaid-amount');
             const zBtn = document.getElementById('btn-pay-zakat');
@@ -1192,7 +1321,6 @@
                 }
             }
 
-            // Infaq
             let infaqUnpaid = 0;
             const iBox = document.getElementById('infaq-unpaid-amount');
             const iBtn = document.getElementById('btn-pay-infaq');
@@ -1214,7 +1342,6 @@
                 }
             }
 
-            // Sedekah
             let sedekahUnpaid = 0;
             const sBox = document.getElementById('sedekah-unpaid-amount');
             const sBtn = document.getElementById('btn-pay-sedekah');
@@ -1535,7 +1662,6 @@
             lucide.createIcons();
         }
 
-        // --- TERJEMAHAN ARUS KAS MENYELURUH (P2K2 COMPREHENSIVE) ---
         function generateAITranslation() {
             const box = document.getElementById('ai-translation-box');
             const content = document.getElementById('ai-translation-content');
@@ -1550,15 +1676,15 @@
             let totalSavingsGoals = appState.savings.reduce((acc, s) => acc + s.target, 0);
             let totalSavingsCollected = appState.savings.reduce((acc, s) => acc + s.collected, 0);
             
-            let totalMinjam = appState.loans.filter(l => l.mode === 'minjam').reduce((acc, l) => acc + l.amount, 0);
-            let totalMeminjamkan = appState.loans.filter(l => l.mode === 'meminjamkan').reduce((acc, l) => acc + l.amount, 0);
+            let totalMinjam = appState.loans.filter(l => l.mode === 'minjam').reduce((acc, l) => acc + l.sisaAmount, 0);
+            let totalMeminjamkan = appState.loans.filter(l => l.mode === 'meminjamkan').reduce((acc, l) => acc + l.sisaAmount, 0);
 
             let evaluation = "";
             if (totalIncome === 0 && totalExpense === 0) {
                 evaluation = "Belum ada catatan transaksi yang dimasukkan. Silakan catat pemasukan dan pengeluaran keluarga Anda terlebih dahulu agar sistem dapat memberikan evaluasi P2K2 secara utuh.";
             } else {
                 let ratio = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
-                evaluation = `<b>1. Arus Kas Utama:</b> Total pemasukan tercatat ${formatRupiah(totalIncome)} berbanding pengeluaran ${formatRupiah(totalExpense)} (Sisa Kas: ${formatRupiah(saldoKas)}). Rasio pengeluaran Anda berada di angka ${ratio.toFixed(1)}%. `;
+                evaluation = `<b>1. Arus Kas Utama:</b> Total pemasukan tercatat ${formatRupiah(totalIncome)} berbanding pengeluaran ${formatRupiah(totalExpense)} (Saldo Kas Bersih: ${formatRupiah(saldoKas)}). Rasio pengeluaran Anda berada di angka ${ratio.toFixed(1)}%. `;
                 
                 if (ratio > 80) {
                     evaluation += `<b>Perhatian (P2K2):</b> Pengeluaran cukup tinggi. Utamakan kebutuhan primer dan tekan keinginan konsumtif. `;
@@ -1569,11 +1695,11 @@
                 evaluation += `<br><br><b>2. Rencana Menabung:</b> Dari target tabungan keluarga sebesar ${formatRupiah(totalSavingsGoals)}, telah terkumpul ${formatRupiah(totalSavingsCollected)}. Terus tingkatkan kedisiplinan menyisihkan dana di awal.`;
 
                 if (totalMinjam > 0) {
-                    evaluation += `<br><br><b>3. Modul Pinjaman (Cermat Meminjam):</b> Anda memiliki catatan pinjaman aktif sebesar ${formatRupiah(totalMinjam)}. Pastikan pinjaman dikelola untuk hal produktif atau darurat serta dicicil tepat waktu.`;
+                    evaluation += `<br><br><b>3. Modul Pinjaman (Cermat Meminjam):</b> Sisa tanggungan pinjaman aktif tercatat sebesar ${formatRupiah(totalMinjam)}. Pastikan cicilan dibayar tepat waktu dari saldo kas.`;
                 }
 
                 if (totalMeminjamkan > 0) {
-                    evaluation += `<br><br><b>4. Modul Piutang (Cermat Meminjamkan):</b> Tercatat piutang/bantuan ke pihak lain sebesar ${formatRupiah(totalMeminjamkan)}.`;
+                    evaluation += `<br><br><b>4. Modul Piutang (Cermat Meminjamkan):</b> Sisa piutang/bantuan yang belum dilunasi pihak lain sebesar ${formatRupiah(totalMeminjamkan)}.`;
                 }
 
                 if (totalZIS > 0) {
