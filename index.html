@@ -719,6 +719,14 @@
                 sedekahActive: false,
                 sedekahPercent: 2.5
             },
+            // Daftar ID pemasukan yang sudah ditunaikan ZIS.
+            // Menggunakan ID, bukan indeks array, karena transaksi baru ditambahkan
+            // dengan unshift() sehingga posisi/indeks transaksi selalu berubah.
+            zisPaidIncomeIds: {
+                zakat: [],
+                infaq: [],
+                sedekah: []
+            },
             zisPaidIds: {
                 zakatLastPaidIndex: 0,
                 infaqLastPaidIndex: 0,
@@ -797,7 +805,8 @@
                 savings: appState.savings,
                 loans: appState.loans,
                 zisConfig: appState.zisConfig,
-                zisPaidIds: appState.zisPaidIds
+                zisPaidIds: appState.zisPaidIds, // disimpan untuk kompatibilitas data lama
+                zisPaidIncomeIds: appState.zisPaidIncomeIds
             }));
         }
 
@@ -821,6 +830,21 @@
                     infaqLastPaidIndex: 0,
                     sedekahLastPaidIndex: 0
                 }, data.zisPaidIds || {});
+
+                // Sistem baru memakai ID transaksi agar pemasukan setelah pembayaran
+                // tetap terhitung walaupun transaksi disimpan di awal array.
+                if (data.zisPaidIncomeIds &&
+                    typeof data.zisPaidIncomeIds === 'object') {
+                    appState.zisPaidIncomeIds = {
+                        zakat: Array.isArray(data.zisPaidIncomeIds.zakat) ? data.zisPaidIncomeIds.zakat : [],
+                        infaq: Array.isArray(data.zisPaidIncomeIds.infaq) ? data.zisPaidIncomeIds.infaq : [],
+                        sedekah: Array.isArray(data.zisPaidIncomeIds.sedekah) ? data.zisPaidIncomeIds.sedekah : []
+                    };
+                } else {
+                    // Migrasi data lama: tandai pemasukan yang tercatat sebelum
+                    // pembayaran terakhir sebagai sudah ditunaikan.
+                    appState.zisPaidIncomeIds = migrateLegacyZISPaidIds(appState.transactions);
+                }
             }
         }
 
@@ -1262,6 +1286,49 @@
         }
 
         // --- ZIS LOGIC ---
+        // Mengambil pemasukan yang belum pernah dimasukkan ke pembayaran ZIS.
+        // ID transaksi stabil; jangan memakai slice(index), karena transaksi baru
+        // dimasukkan dengan unshift() sehingga indeks pemasukan lama bergeser.
+        function getUnpaidZISIncomes(type) {
+            const paidIds = new Set(
+                (appState.zisPaidIncomeIds && appState.zisPaidIncomeIds[type]) || []
+            );
+            return appState.transactions.filter(t =>
+                t.type === 'pemasukan' && !paidIds.has(String(t.id))
+            );
+        }
+
+        // Migrasi satu kali dari format lama (LastPaidIndex) ke daftar ID.
+        function migrateLegacyZISPaidIds(transactions) {
+            const result = { zakat: [], infaq: [], sedekah: [] };
+            const incomes = transactions.filter(t => t.type === 'pemasukan');
+            const paymentTypes = [
+                { key: 'zakat', match: /zakat/i },
+                { key: 'infaq', match: /infaq/i },
+                { key: 'sedekah', match: /sedekah/i }
+            ];
+
+            paymentTypes.forEach(item => {
+                const payments = transactions
+                    .filter(t => t.type === 'zis' && item.match.test(String(t.category || '')))
+                    .sort((a, b) => {
+                        const ta = Number(String(a.id || '').split('_').pop()) || 0;
+                        const tb = Number(String(b.id || '').split('_').pop()) || 0;
+                        return tb - ta;
+                    });
+                const lastPayment = payments[0];
+                if (!lastPayment) return;
+
+                const paymentTime = Number(String(lastPayment.id || '').split('_').pop()) || 0;
+                result[item.key] = incomes.filter(income => {
+                    const incomeTime = Number(String(income.id || '').split('_').pop()) || 0;
+                    if (paymentTime && incomeTime) return incomeTime <= paymentTime;
+                    return String(income.date || '') <= String(lastPayment.date || '');
+                }).map(income => String(income.id));
+            });
+            return result;
+        }
+
         function syncZISUI() {
             const zCheckbox = document.getElementById('zakat-active');
             const iCheckbox = document.getElementById('infaq-active');
@@ -1292,27 +1359,24 @@
         function calculateZISUnpaid() {
             const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
             const nishobBulanan = 7640144;
-            let totalIncomeAll = incomes.reduce((acc, t) => acc + t.amount, 0);
+            const totalIncomeAll = incomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
 
             let zakatUnpaid = 0;
             const zBox = document.getElementById('zakat-unpaid-amount');
             const zBtn = document.getElementById('btn-pay-zakat');
 
             if (appState.zisConfig.zakatActive && totalIncomeAll >= nishobBulanan) {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.zakatLastPaidIndex);
-                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                const unpaidIncomes = getUnpaidZISIncomes('zakat');
+                const sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
                 zakatUnpaid = sumUnpaidIncome * 0.025;
             }
 
             if (zBox) zBox.innerText = formatRupiah(zakatUnpaid);
             if (zBtn) {
-                if (zakatUnpaid > 0) {
-                    zBtn.disabled = false;
-                    zBtn.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
-                } else {
-                    zBtn.disabled = true;
-                    zBtn.className = "w-full bg-emerald-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
-                }
+                zBtn.disabled = !(zakatUnpaid > 0);
+                zBtn.className = zakatUnpaid > 0
+                    ? "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer"
+                    : "w-full bg-emerald-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
             }
 
             let infaqUnpaid = 0;
@@ -1320,20 +1384,17 @@
             const iBtn = document.getElementById('btn-pay-infaq');
 
             if (appState.zisConfig.infaqActive) {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.infaqLastPaidIndex);
-                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                const unpaidIncomes = getUnpaidZISIncomes('infaq');
+                const sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
                 infaqUnpaid = sumUnpaidIncome * (appState.zisConfig.infaqPercent / 100);
             }
 
             if (iBox) iBox.innerText = formatRupiah(infaqUnpaid);
             if (iBtn) {
-                if (infaqUnpaid > 0) {
-                    iBtn.disabled = false;
-                    iBtn.className = "w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
-                } else {
-                    iBtn.disabled = true;
-                    iBtn.className = "w-full bg-blue-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
-                }
+                iBtn.disabled = !(infaqUnpaid > 0);
+                iBtn.className = infaqUnpaid > 0
+                    ? "w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer"
+                    : "w-full bg-blue-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
             }
 
             let sedekahUnpaid = 0;
@@ -1341,49 +1402,49 @@
             const sBtn = document.getElementById('btn-pay-sedekah');
 
             if (appState.zisConfig.sedekahActive) {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.sedekahLastPaidIndex);
-                let sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                const unpaidIncomes = getUnpaidZISIncomes('sedekah');
+                const sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
                 sedekahUnpaid = sumUnpaidIncome * (appState.zisConfig.sedekahPercent / 100);
             }
 
             if (sBox) sBox.innerText = formatRupiah(sedekahUnpaid);
             if (sBtn) {
-                if (sedekahUnpaid > 0) {
-                    sBtn.disabled = false;
-                    sBtn.className = "w-full bg-purple-700 hover:bg-purple-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer";
-                } else {
-                    sBtn.disabled = true;
-                    sBtn.className = "w-full bg-purple-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
-                }
+                sBtn.disabled = !(sedekahUnpaid > 0);
+                sBtn.className = sedekahUnpaid > 0
+                    ? "w-full bg-purple-700 hover:bg-purple-800 text-white font-black py-2.5 rounded-lg text-xs transition-all shadow-md cursor-pointer"
+                    : "w-full bg-purple-700 text-white font-black py-2.5 rounded-lg text-xs opacity-50 cursor-not-allowed";
             }
         }
 
         function payZIS(type) {
-            const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
+            if (!['zakat', 'infaq', 'sedekah'].includes(type)) return;
+
+            const incomes = getUnpaidZISIncomes(type);
+            const sumUnpaid = incomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
             let amountToPay = 0;
-            let categoryName = "";
+            let categoryName = '';
 
             if (type === 'zakat') {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.zakatLastPaidIndex);
-                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                const totalIncomeAll = appState.transactions
+                    .filter(t => t.type === 'pemasukan')
+                    .reduce((acc, t) => acc + Number(t.amount || 0), 0);
+                if (!appState.zisConfig.zakatActive || totalIncomeAll < 7640144) {
+                    calculateZISUnpaid();
+                    return;
+                }
                 amountToPay = sumUnpaid * 0.025;
                 categoryName = "Pembayaran Zakat Penghasilan (Baznas)";
-                appState.zisPaidIds.zakatLastPaidIndex = incomes.length;
             } else if (type === 'infaq') {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.infaqLastPaidIndex);
-                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+                if (!appState.zisConfig.infaqActive) return;
                 amountToPay = sumUnpaid * (appState.zisConfig.infaqPercent / 100);
                 categoryName = `Pembayaran Infaq (${appState.zisConfig.infaqPercent}%)`;
-                appState.zisPaidIds.infaqLastPaidIndex = incomes.length;
-            } else if (type === 'sedekah') {
-                const unpaidIncomes = incomes.slice(appState.zisPaidIds.sedekahLastPaidIndex);
-                let sumUnpaid = unpaidIncomes.reduce((acc, t) => acc + t.amount, 0);
+            } else {
+                if (!appState.zisConfig.sedekahActive) return;
                 amountToPay = sumUnpaid * (appState.zisConfig.sedekahPercent / 100);
                 categoryName = `Pembayaran Sedekah (${appState.zisConfig.sedekahPercent}%)`;
-                appState.zisPaidIds.sedekahLastPaidIndex = incomes.length;
             }
 
-            if (amountToPay <= 0) return;
+            if (amountToPay <= 0 || incomes.length === 0) return;
 
             const today = new Date().toISOString().split('T')[0];
             appState.transactions.unshift({
@@ -1392,12 +1453,21 @@
                 category: categoryName,
                 amount: amountToPay,
                 date: today,
-                desc: 'Ditunaikan secara resmi (Reset ke Rp 0)'
+                desc: 'Ditunaikan; akumulasi berikutnya dimulai dari pemasukan baru'
             });
+
+            // Hanya ID pemasukan yang benar-benar dibayarkan yang ditandai lunas.
+            // Pemasukan baru setelah ini otomatis masuk akumulasi berikutnya.
+            if (!appState.zisPaidIncomeIds) {
+                appState.zisPaidIncomeIds = { zakat: [], infaq: [], sedekah: [] };
+            }
+            const paidSet = new Set(appState.zisPaidIncomeIds[type] || []);
+            incomes.forEach(tx => paidSet.add(String(tx.id)));
+            appState.zisPaidIncomeIds[type] = Array.from(paidSet);
 
             saveToStorage();
             refreshAppUI();
-            showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Nominal saat ini kembali menjadi Rp 0 dan akan terakumulasi kembali dari pemasukan baru berikutnya.`);
+            showModal("Alhamdulillah Berhasil", `Pembayaran ${categoryName} sebesar ${formatRupiah(amountToPay)} telah berhasil ditunaikan. Akumulasi kembali dimulai dari pemasukan baru berikutnya.`);
         }
 
         function renderRecentTransactions() {
