@@ -1357,18 +1357,23 @@
         }
 
         function calculateZISUnpaid() {
-            const incomes = appState.transactions.filter(t => t.type === 'pemasukan');
             const nishobBulanan = 7640144;
-            const totalIncomeAll = incomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
 
             let zakatUnpaid = 0;
             const zBox = document.getElementById('zakat-unpaid-amount');
             const zBtn = document.getElementById('btn-pay-zakat');
 
-            if (appState.zisConfig.zakatActive && totalIncomeAll >= nishobBulanan) {
-                const unpaidIncomes = getUnpaidZISIncomes('zakat');
-                const sumUnpaidIncome = unpaidIncomes.reduce((acc, t) => acc + Number(t.amount || 0), 0);
-                zakatUnpaid = sumUnpaidIncome * 0.025;
+            // Nisab zakat dihitung dari pemasukan BARU sejak pembayaran zakat terakhir,
+            // bukan dari seluruh pemasukan sepanjang riwayat akun.
+            const unpaidZakatIncomes = getUnpaidZISIncomes('zakat');
+            const sumUnpaidZakatIncome = unpaidZakatIncomes.reduce(
+                (acc, t) => acc + Number(t.amount || 0), 0
+            );
+
+            // Zakat baru mulai dihitung jika akumulasi pemasukan baru mencapai nisab.
+            // Jika belum mencapai nisab, nominal zakat tetap Rp 0.
+            if (appState.zisConfig.zakatActive && sumUnpaidZakatIncome >= nishobBulanan) {
+                zakatUnpaid = sumUnpaidZakatIncome * 0.025;
             }
 
             if (zBox) zBox.innerText = formatRupiah(zakatUnpaid);
@@ -1425,10 +1430,9 @@
             let categoryName = '';
 
             if (type === 'zakat') {
-                const totalIncomeAll = appState.transactions
-                    .filter(t => t.type === 'pemasukan')
-                    .reduce((acc, t) => acc + Number(t.amount || 0), 0);
-                if (!appState.zisConfig.zakatActive || totalIncomeAll < 7640144) {
+                // Syarat pembayaran sama dengan tampilan: hanya akumulasi pemasukan
+                // yang belum pernah dizakati yang diuji terhadap nisab.
+                if (!appState.zisConfig.zakatActive || sumUnpaid < 7640144) {
                     calculateZISUnpaid();
                     return;
                 }
